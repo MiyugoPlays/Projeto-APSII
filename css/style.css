@@ -1,3 +1,116 @@
+html, body{
+    height: 100%;
+    margin: 0;
+}
 
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+  
+  header {
+    display: flex; /* Torna o header um flex container */
+    justify-content: space-between; /* Distribui os itens uniformemente, com espaço entre eles */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    background-color: white;
+    padding: 20px;
+  }
+  
+  .perfil {
+    height: 30px;
+    width: 30px;
+  }
+  
+  nav {
+    display: flex;
+    width: 100%;
+    justify-content: space-between; /* Espaça os itens do nav */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+  }
+  
+  nav h1 {
+    margin: 0;
+  }
+  
+  nav ul {
+    display: flex; /* Torna a lista um flex container */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+  }
+  
+  nav li {
+    margin: 0 10px;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #333;
+    margin: 15px;
+  }
+  
+  main {
+    flex: 1;
+    background-image: url('../assets/fundomain.jpg'); /* Substitua por o caminho da sua imagem */
+    background-size: cover; /* Ajusta a imagem para cobrir todo o elemento */
+    background-position: center; /* Centraliza a imagem */
+    /* Outras propriedades opcionais: */
+    background-repeat: no-repeat; /* Impede que a imagem se repita */
+    background-attachment: fixed; /* Faz com que a imagem permaneça fixa enquanto o usuário rola a página */
+    position: relative;
+    }
 
+  
+  section {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+  }
 
+  section input, section button {
+    box-sizing: border-box; /* Garante que padding e border não aumentem o tamanho */
+  padding: 0px 10px;
+  margin: 10px;
+  width: 300px;
+  height: 40px;
+  text-align: center;
+  }
+
+  .container {
+    background-color: rgba(255, 255, 255, 0.9);
+    margin-left: 10%; 
+    padding: 1.2rem;
+    padding-bottom: 20%;
+    padding-top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+  
+  input {
+    border: 1px solid #ccc;
+  }
+  
+  button {
+    background-color: #a7d7ff;
+    color: black;
+    border: none;
+    cursor: pointer;
+  }
+  
+  footer {
+    text-align: center;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: white;
+    background-color: rgb(255, 255, 255, 0); /* Transparência de 50% */
+    position: absolute;
+    z-index: 1; /* Garante que o footer fique sobre a imagem */
+  }
+  
