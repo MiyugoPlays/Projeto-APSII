@@ -16,7 +16,7 @@ body {
     justify-content: space-between; /* Distribui os itens uniformemente, com espaço entre eles */
     align-items: center; /* Alinha os itens verticalmente ao centro */
     background-color: white;
-    padding: 20px;
+    padding: 5px;
   }
   
   .perfil {
@@ -102,7 +102,7 @@ body {
     border: none;
     cursor: pointer;
   }
-  
+
   footer {
     text-align: center;
     bottom: 0;
