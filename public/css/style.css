@@ -22,6 +22,7 @@ body {
   .perfil {
     height: 30px;
     width: 30px;
+    margin: 5px;
   }
   
   nav {
@@ -45,12 +46,15 @@ body {
   
   nav li {
     margin: 0 10px;
+    
   }
   
   nav a {
     text-decoration: none;
     color: #333;
     margin: 15px;
+    display: flex;
+    align-items: center;
   }
   
   main {

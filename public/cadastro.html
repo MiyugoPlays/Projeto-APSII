@@ -4,20 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
-    <link rel="stylesheet" href="css/styleLogin.css">
+    <link rel="stylesheet" href="\css\styleLogin.css">
 </head>
 <body>
     <main>
         <section>
             <form class="container" action="" method="POST">
                 <h2>Cadastro</h2>
-                Email: <input type="email" name="" id="" required>
-                Senha: <input type="password" name="" id="" required>
-                <button type="submit">Cadastrar</button>
-                <a href="login.html">Possui conta? Clique aqui para logar</a>
+                Email: <input type="email" name="email" id="email" required>
+                Senha: <input type="password" name="senha" id="senha" required>
+                Digite novamente a senha: <input type="password" name="confirmarSenha" id="confirmarSenha" required>
+                <button type="button" onclick="validarCampos()">Cadastrar</button>
+                <p id="mensagem"></p>
+                <a href="/login">Possui conta? Clique aqui para logar</a>
             </form>
        
         </section>
     </main>
+    <script src="\js\scriptCadastro.js">
+    </script>
 </body>
 </html>
