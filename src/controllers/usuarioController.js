@@ -5,6 +5,8 @@ const cadastrar = async (req, res) => {
 
     try {
         const result = await usuarioService.cadastrarUsuario(email, senha)
+        const user = await usuarioService.autenticarUsuario(email, senha);
+        res.cookie('usuarioId', user.id, { httpOnly: true });
         res.status(201).json({ message: 'Usuario cadastrado com sucesso', userId: result.insertId})
     } catch (error) {
         res.status(400).json({ message: error.message})
@@ -16,6 +18,7 @@ const login = async (req, res) => {
 
     try {
         const user = await usuarioService.autenticarUsuario(email, senha);
+        res.cookie('usuarioId', user.id, { httpOnly: true })
         res.status(200).json({ message: 'Login bem-sucedido!', user });
     } catch (error) {
         res.status(401).json({ message: error.message });

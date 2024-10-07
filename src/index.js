@@ -1,12 +1,13 @@
 const express = require('express');
-const mysql = require('mysql2');
 const path = require('path');
 const routes = require('./routes/routes.js'); // Importar as rotas
-const db = require('./db.js');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+
+app.use(cookieParser())
 app.use(express.static(path.join(__dirname, '../public')));
 // Middleware para analisar o corpo da requisição como JSON
 app.use(express.json());

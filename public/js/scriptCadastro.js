@@ -60,6 +60,7 @@ document.getElementById('cadastroForm').addEventListener('submit', async (e) => 
 
         const data = await response.json();
         alert(data.message);
+        window.location.href = '/';
     } catch (error) {
         alert('Erro ao cadastrar: ' + error.message);
     }

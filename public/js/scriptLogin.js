@@ -16,6 +16,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         const data = await response.json();
         if (response.ok) {
             alert(data.message); // Mensagem de sucesso
+            window.location.href = '/';
             // Redirecionar ou fazer algo após o login
         } else {
             alert('Erro: ' + data.message); // Mensagem de erro
