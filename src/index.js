@@ -8,6 +8,10 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, '../public')));
+// Middleware para analisar o corpo da requisição como JSON
+app.use(express.json());
+// Se você precisar lidar com dados URL-encoded (como formulários HTML):
+app.use(express.urlencoded({ extended: true }));
 
 // Usar as rotas
 app.use('/', routes);

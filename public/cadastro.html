@@ -9,12 +9,12 @@
 <body>
     <main>
         <section>
-            <form class="container" action="" method="POST">
+            <form id="cadastroForm" class="container" action="" method="POST">
                 <h2>Cadastro</h2>
                 Email: <input type="email" name="email" id="email" required>
                 Senha: <input type="password" name="senha" id="senha" required>
                 Digite novamente a senha: <input type="password" name="confirmarSenha" id="confirmarSenha" required>
-                <button type="button" onclick="validarCampos()">Cadastrar</button>
+                <button type="submit" onclick="validarCampos()">Cadastrar</button>
                 <p id="mensagem"></p>
                 <a href="/login">Possui conta? Clique aqui para logar</a>
             </form>

@@ -1,16 +1,15 @@
 const db = require('../db.js');
 
 const Espaco = {
-    obterEspacos: () => {
-        return new Promise((resolve, reject) =>{
-            db.query('SELECT * FROM espacos', (err, results) => {
-                if (err) {
-                    return reject(err);
-                }
-                resolve(results);
-            })
-        })
+    obterEspacos: async () => {
+        try {
+            const [results] = await db.query('SELECT * FROM espacos');
+            return results;
+        } catch (err) {
+            throw new Error('Erro ao obter espaços: ' + err.message);
+        }
     }
-}
+};
+
 
 module.exports = Espaco;
