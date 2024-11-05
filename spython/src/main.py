@@ -1,4 +1,7 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.templaing import Jinja2Templates
+from fastapi.responses import HTMLResponse
+from fastapi import Request
 from pydantic import BaseModel
 from typing import List
 from user import User
@@ -10,6 +13,7 @@ from admin import Administrator
 from config import db_config
 from client import Client
 from fastapi.middleware.cors import CORSMiddleware
+import os
 
 app = FastAPI()
 
@@ -26,6 +30,17 @@ app.add_middleware(
     allow_methods=["*"],  # Allow all HTTP methods (GET, POST, PUT, DELETE, etc.)
     allow_headers=["*"],  # Allow all headers
 )
+
+template_dir = os.path.join(os.path.dirname(__file__), "../front/html")
+
+
+templates = Jinja2Templates(directory=os.path.abspath(template_dir))
+
+
+@app.get("/", response_cass=HTMLResponse)
+async def read_home(request: Request):
+
+    return templates.TemplateResponse("index.html", {"request": request})
 
 
 class UserCreateRequest(BaseModel):

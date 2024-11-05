@@ -1,8 +1,8 @@
 db_config = {
     "host": "localhost",
-    "port": 3306,                 # Modifique caso necessario
-    "user": "user",      # MySQL user
+    "port": 3306,                 # Modifique caso necessario APENAS  PARA DISPONIBILIZAR SEU NOME OU/E SENHA
+    "user": "username",      # MySQL user
     "password": "password",  # MySQL password
-    "db": "nome_db",   # The name of the database you're using
-    "autocommit": True,           # Optional: Auto-commit behavior
+    "db": "reservas_salle",
+    "autocommit": True,
 }
