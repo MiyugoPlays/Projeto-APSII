@@ -3,29 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Reservas Salle</title>
+    <title>Espaços</title>
+    <link rel="stylesheet" href="css/style.css"> <!-- External CSS link -->
+    <script src="js/espacos.js" defer></script> <!-- External JS link -->
 </head>
 <body>
     <header>
         <nav>
-            <h1>RESERVAS <br>SALLE</h1>
+            <h1>RESERVAS <br> Espaços</h1>
             <ul>
-                <li><a href="espacos.html">Espaços</a></li>
+                <li><a href="index.html">Início</a></li>
                 <li><a href="sobre.html">Sobre</a></li>
-                <li><img src="assets/contact.png" class="perfil"></li>
+                <li><img src="assets/contact.png" class="perfil" alt="Perfil"></li>
             </ul>
         </nav>
     </header>
+
     <main>
         <section>
             <div class="container">
-            <h2>Busque seu primeiro espaço</h2>
-            <input type="text" placeholder="nome de alguma coisa...">
-            <button>Pesquisar</button> 
-            </div>   
+                <h2>Espaços Disponíveis</h2>
+                <div id="spaces-list">
+                    <!-- Dynamic content will be injected here by JS -->
+                </div>
+            </div>
         </section>
     </main>
+
     <footer>
         <p>2024 Reservas Salle. Todos os direitos reservados.</p>
     </footer>

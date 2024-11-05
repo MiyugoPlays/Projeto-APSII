@@ -1,0 +1,208 @@
+/* /css/espaco.css */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 20px;
+}
+
+.perfil {
+    height: 30px;
+    width: 30px;
+}
+
+nav {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav h1 {
+    margin: 0;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+nav li {
+    margin: 0 10px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    margin: 15px;
+}
+
+main {
+    flex: 1;
+    background-image: url('/assets/fundomain.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+    padding: 20px;
+}
+
+.property-details {
+    max-width: 900px;
+    margin: 20px auto;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.property-image {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.price {
+    font-size: 26px;
+    color: #ff5a5f;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.description {
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.booking-section {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.booking-section h2 {
+    margin-bottom: 15px;
+    font-size: 22px;
+    color: #333;
+}
+
+.booking-section form {
+    display: flex;
+    flex-direction: column;
+}
+
+.booking-section label {
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+.booking-section input {
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.booking-section button {
+    padding: 12px;
+    background-color: #ff5a5f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.booking-section button:hover {
+    background-color: #e74c3c;
+}
+
+.amenities, .reviews {
+    padding: 30px;
+    max-width: 900px;
+    margin: 20px auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.amenities h2, .reviews h2 {
+    margin-bottom: 15px;
+    font-size: 22px;
+    color: #333;
+}
+
+.amenities ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.amenities ul li {
+    background: #e9ecef;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+.review {
+    margin-top: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.review:last-child {
+    border-bottom: none;
+}
+
+.review p {
+    margin: 5px 0;
+}
+
+.image-gallery {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+
+.image-gallery img {
+    width: calc(33.33% - 10px);
+    border-radius: 10px;
+    height: auto;
+}
+
+footer {
+    text-align: center;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: white;
+    background-color: rgb(255, 255, 255, 0);
+    position: relative;
+    padding: 10px 0;
+}

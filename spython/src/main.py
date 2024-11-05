@@ -9,8 +9,23 @@ from review import Review
 from admin import Administrator
 from config import db_config
 from client import Client
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+
+origins = [
+    "http://localhost:3000",  # Add your frontend URL here
+    "http://localhost:8000",  # Backend URL (for API calls)
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # Allow requests from these origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods (GET, POST, PUT, DELETE, etc.)
+    allow_headers=["*"],  # Allow all headers
+)
 
 
 class UserCreateRequest(BaseModel):
@@ -93,6 +108,20 @@ async def create_space(space_request: SpaceRequest):
     )
     await space.insert(db_config)
     return {"message": "Space created successfully"}
+
+
+@app.get("/spaces")
+async def get_spaces():
+    spaces = await Space.view_all_spaces()  # This should return a list of all spaces
+    return spaces
+
+
+@app.get("/spaces/{space_id}")
+async def get_space(space_id: int):
+    space = await Space.view_all_spaces()  # You could change this to fetch by ID if needed
+    if space:
+        return space
+    raise HTTPException(status_code=404, detail="Space not found")
 
 
 @app.get("/spaces/user/{user_id}")

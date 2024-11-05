@@ -1,116 +1,121 @@
-html, body{
+html, body {
     height: 100%;
     margin: 0;
+    font-family: Arial, sans-serif;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
     display: flex;
     flex-direction: column;
     padding: 0;
-  }
-  
-  header {
-    display: flex; /* Torna o header um flex container */
-    justify-content: space-between; /* Distribui os itens uniformemente, com espaço entre eles */
-    align-items: center; /* Alinha os itens verticalmente ao centro */
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: white;
     padding: 20px;
-  }
-  
-  .perfil {
+}
+
+.perfil {
     height: 30px;
     width: 30px;
-  }
-  
-  nav {
+}
+
+nav {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
-    justify-content: space-between; /* Espaça os itens do nav */
-    align-items: center; /* Alinha os itens verticalmente ao centro */
-  }
-  
-  nav h1 {
-    margin: 0;
-  }
-  
-  nav ul {
-    display: flex; /* Torna a lista um flex container */
+}
+
+nav ul {
+    display: flex;
     list-style: none;
     margin: 0;
     padding: 0;
-    align-items: center;
-  }
-  
-  nav li {
+}
+
+nav li {
     margin: 0 10px;
-  }
-  
-  nav a {
+}
+
+nav a {
     text-decoration: none;
     color: #333;
     margin: 15px;
-  }
-  
-  main {
+}
+
+main {
     flex: 1;
-    background-image: url('../assets/fundomain.jpg'); /* Substitua por o caminho da sua imagem */
-    background-size: cover; /* Ajusta a imagem para cobrir todo o elemento */
-    background-position: center; /* Centraliza a imagem */
-    /* Outras propriedades opcionais: */
-    background-repeat: no-repeat; /* Impede que a imagem se repita */
-    background-attachment: fixed; /* Faz com que a imagem permaneça fixa enquanto o usuário rola a página */
+    background-image: url('../assets/fundomain.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     position: relative;
-    }
+    padding: 20px;
+}
 
-  
-  section {
-    display: flex;
-    flex-direction: row;
-    text-align: center;
-  }
-
-  section input, section button {
-    box-sizing: border-box; /* Garante que padding e border não aumentem o tamanho */
-  padding: 0px 10px;
-  margin: 10px;
-  width: 300px;
-  height: 40px;
-  text-align: center;
-  }
-
-  .container {
+.container {
     background-color: rgba(255, 255, 255, 0.9);
-    margin-left: 10%; 
-    padding: 1.2rem;
-    padding-bottom: 20%;
-    padding-top: 5%;
+    margin-left: 10%;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-  
-  input {
-    border: 1px solid #ccc;
-  }
-  
-  button {
-    background-color: #a7d7ff;
-    color: black;
-    border: none;
-    cursor: pointer;
-  }
-  
-  footer {
+
+#spaces-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.space-item {
+    background-color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    padding: 20px;
+    border-radius: 10px;
     text-align: center;
+}
+
+.space-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.space-item .price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff5a5f;
+    margin-bottom: 10px;
+}
+
+.space-item .btn {
+    background-color: #a7d7ff;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: black;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.space-item .btn:hover {
+    background-color: #82c8f6;
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    position: relative;
     bottom: 0;
-    left: 0;
-    right: 0;
-    color: white;
-    background-color: rgb(255, 255, 255, 0); /* Transparência de 50% */
-    position: absolute;
-    z-index: 1; /* Garante que o footer fique sobre a imagem */
-  }
-  
+    width: 100%;
+}
