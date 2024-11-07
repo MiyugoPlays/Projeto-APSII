@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException
-from fastapi.templaing import Jinja2Templates
+from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from fastapi import Request
 from pydantic import BaseModel
@@ -37,7 +37,7 @@ template_dir = os.path.join(os.path.dirname(__file__), "../front/html")
 templates = Jinja2Templates(directory=os.path.abspath(template_dir))
 
 
-@app.get("/", response_cass=HTMLResponse)
+@app.get("/", response_class=HTMLResponse)
 async def read_home(request: Request):
 
     return templates.TemplateResponse("index.html", {"request": request})
