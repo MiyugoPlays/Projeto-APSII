@@ -4,19 +4,33 @@ from fastapi.responses import HTMLResponse
 from fastapi import Request
 from pydantic import BaseModel
 from typing import List
-from src.user import User
-from src.location import Location
-from src.space import Space
-from src.booking import Booking
-from src.review import Review
-from src.admin import Administrator
-from src.client import Client
-from fastapi.middleware.cors import CORSMiddleware
+from user import User
+from location import Location
+from space import Space
+from booking import Booking
+from review import Review
+from admin import Administrator
+from client import Client
+import aiomysql
+from fastapi.staticfiles import StaticFiles
 import sys
 import os
-sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '...', 'src')))
+try:
+    from config import db_config
+except ImportError:
+    db_config = {
+            "host": "localhost",
+            "port": 3306,                 # Modifique caso necessario APENAS  PARA DISPONIBILIZAR SEU NOME OU/E SENHA
+            "user": "guilde@localhost",      # MySQL user
+            "password": "amongus@420",  # MySQL password
+            "db": "reservas_salle",
+            "autocommit": True,
+            }
 
-from src.config import db_config
+
+from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI()
 

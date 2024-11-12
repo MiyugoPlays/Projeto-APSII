@@ -4,7 +4,7 @@ from config import db_config
 
 
 class Space:
-    def __init__(self, id_space: int, id_usr: int, id_local: int, price: float, space_name: str, space_desc: str, space_photo: str, rooms: int, max_people: int, area: float, address: str, latitude: float, longitude: float):
+    def __init__(self, id_space: int, id_usr: int, id_local: int, price: float, space_name: str, space_desc: str, space_photo: str, rooms: int, max_people: int, area: float, address: str, latitude: float, longitude: float, is_rented: int = 0):
         self.id_space = None
         self.id_usr = id_usr
         self.id_local = id_local
@@ -18,6 +18,7 @@ class Space:
         self.address = address
         self.latitude = latitude
         self.longitude = longitude
+        self.is_rented = is_rented
         self.reviews = []
         self._insert()
 
@@ -44,17 +45,37 @@ class Space:
         return f"{self.BASE_URL}{self.space_photo}"
 
 
-    @staticmethod
-    async def view_spaces_by_user(id_usr: int) -> List['Space']:
-        """View all spaces by a specific user."""
-        query = "SELECT * FROM spaces WHERE id_usr = %s;"
+def to_dict(self):
+    """Convert the space object to a dictionary."""
+    return {
+        "id_space": self.id_space,
+        "id_usr": self.id_usr,
+        "id_local": self.id_local,
+        "price": self.price,
+        "space_name": self.space_name,
+        "space_desc": self.space_desc,
+        "space_photo": self.space_photo,
+        "rooms": self.rooms,
+        "max_people": self.max_people,
+        "area": self.area,
+        "address": self.address,
+        "latitude": self.latitude,
+        "longitude": self.longitude,
+        "is_rented": self.is_rented
+    }
 
-        async with aiomysql.create_pool(**db_config) as pool:
-            async with pool.acquire() as conn:
-                async with conn.cursor(aiomysql.DictCursor) as cursor:
-                    await cursor.execute(query, (id_usr,))
-                    spaces_data = await cursor.fetchall()
-                    return [Space(**space) for space in spaces_data]
+
+@staticmethod
+async def view_all_spaces() -> List[dict]:
+    """View all spaces available in the database."""
+    query = "SELECT * FROM spaces;"
+
+    async with aiomysql.create_pool(**db_config) as pool:
+        async with pool.acquire() as conn:
+            async with conn.cursor(aiomysql.DictCursor) as cursor:
+                await cursor.execute(query)
+                spaces_data = await cursor.fetchall()
+                return [Space(**space).to_dict() for space in spaces_data]
 
     async def update_space(self) -> bool:
         """Update space information."""

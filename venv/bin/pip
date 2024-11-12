@@ -1,4 +1,4 @@
-#!/home/shinioh/Documents/another_one/Projeto-APSII/venv/bin/python
+#!/home/guilde/Projects/Projeto-APSII/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
