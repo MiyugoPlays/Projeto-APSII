@@ -27,8 +27,13 @@ const procurarPeloEmail = async (email) => {
     return await usuarioModel.procurarPeloEmail(email);
 };
 
+const buscarPerfilUsuario = async (usuarioId) => {
+  return await usuarioModel.buscarPerfilUsuario(usuarioId);
+};
+
 module.exports = {
     cadastrarUsuario,
     autenticarUsuario,
     procurarPeloEmail,
+    buscarPerfilUsuario
 }

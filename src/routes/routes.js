@@ -6,7 +6,7 @@ const usuarioController = require('../controllers/usuarioController.js');
 
 // Middleware de verificação de autenticação
 const verificarAutenticacao = (req, res, next) => {
-    const { usuarioId } = req.cookies; // Lê o cookie
+    const { usuarioId } = req.cookies; // Lê o ID do usuário do cookie
 
     if (!usuarioId) {
         return res.status(401).json({ message: 'Usuário não autenticado.' });
@@ -17,42 +17,68 @@ const verificarAutenticacao = (req, res, next) => {
     next(); // Chama o próximo middleware ou rota
 };
 
-// Rotas que não precisam de autenticação
+// --------- Rotas Públicas (sem necessidade de autenticação) ---------
+
+// Rota para a página de login
 router.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, '../..', 'public', 'login.html'));
 });
 
+// Rota para a página de cadastro
 router.get('/cadastro', (req, res) => {
     res.sendFile(path.join(__dirname, '../..', 'public', 'cadastro.html'));
 });
 
+// Rota para a página de informações sobre o site
+router.get('/sobre', (req, res) => {
+    res.sendFile(path.join(__dirname, '../..', 'public', 'sobre.html'));
+});
+
+// --------- Rotas de API ---------
+
+// Rota de cadastro de usuário (POST)
 router.post('/cadastro', usuarioController.cadastrar);
-router.post('/verificar-email', usuarioController.verificarEmail);
+
+// Rota de login de usuário (POST)
 router.post('/login', usuarioController.login);
 
-// Rota para verificar autenticação
+// Rota para verificar se o email já está cadastrado (POST)
+router.post('/verificar-email', usuarioController.verificarEmail);
+
+// Rota para verificar autenticação do usuário
 router.get('/verificar-autenticacao', verificarAutenticacao, (req, res) => {
     res.json({ autenticado: true }); // Responde que o usuário está autenticado
 });
 
+// Rota de logout do usuário (GET)
 router.get('/logout', (req, res) => {
     res.clearCookie('usuarioId'); // Remove o cookie
     res.status(200).json({ message: 'Logout realizado com sucesso.' });
 });
 
-// Rotas que precisam de autenticação
-router.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../..', 'public', 'index.html'));
+// --------- Rotas Privadas (que exigem autenticação) ---------
+
+// Rota para acessar o perfil do usuário
+router.get('/meu-perfil', verificarAutenticacao, (req, res) => {
+    res.sendFile(path.join(__dirname, '../..', 'public', 'perfil.html'));
 });
 
-router.get('/sobre', (req, res) => {
-    res.sendFile(path.join(__dirname, '../..', 'public', 'sobre.html'));
-});
-
-router.get('/espacos/lista', espacoController.listarEspacos);
-
-router.get('/espacos', (req, res) => {
+// Rota para exibir os espaços (requer autenticação)
+router.get('/espacos', verificarAutenticacao, (req, res) => {
     res.sendFile(path.join(__dirname, '../..', 'public', 'espacos.html'));
+});
+
+// Rota de API para listar todos os espaços
+router.get('/api/listarEspacos', verificarAutenticacao, espacoController.listarEspacos);
+
+// Rota de API para mostrar o perfil do usuário (requere autenticação)
+router.get('/api/mostrarPerfil', verificarAutenticacao, usuarioController.mostrarPerfil);
+
+// --------- Página Inicial ---------
+
+// Rota para a página inicial (requer autenticação)
+router.get('/', verificarAutenticacao, (req, res) => {
+    res.sendFile(path.join(__dirname, '../..', 'public', 'index.html'));
 });
 
 module.exports = router;

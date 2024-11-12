@@ -1,6 +1,6 @@
 async function carregarEspacos() {
     try {
-        const response = await fetch('/espacos/lista');
+        const response = await fetch('/api/listarEspacos');
         if (!response.ok) {
             throw new Error('Erro ao buscar dados');
         }

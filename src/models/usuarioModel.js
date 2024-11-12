@@ -10,7 +10,21 @@ const procurarPeloEmail = async (email) => {
     return rows[0]; // Retorna o primeiro usuário encontrado ou undefined
 };
 
+// Função para buscar os dados do usuário
+const buscarPerfilUsuario = async (usuarioId) => {
+  try {
+    const [results] = await db.query('SELECT senha, email FROM usuarios WHERE id = ?', [usuarioId]);
+
+    return results[0]; // Retorna o primeiro resultado (o usuário encontrado)
+  } catch (err) {
+    // Se ocorrer algum erro, lança uma exceção com a mensagem do erro
+    throw new Error('Erro ao obter perfil do usuário: ' + err.message);
+  }
+};
+
+
 module.exports = {
     criarUsuario,
     procurarPeloEmail,
+    buscarPerfilUsuario
 }
