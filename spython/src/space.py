@@ -37,6 +37,13 @@ class Space:
                         return True
                     return False
 
+
+    BASE_URL = "http://localhost:8000/images/spaces/"
+
+    def get_image_url(self):
+        return f"{self.BASE_URL}{self.space_photo}"
+
+
     @staticmethod
     async def view_spaces_by_user(id_usr: int) -> List['Space']:
         """View all spaces by a specific user."""

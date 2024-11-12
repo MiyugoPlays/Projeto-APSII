@@ -4,16 +4,19 @@ from fastapi.responses import HTMLResponse
 from fastapi import Request
 from pydantic import BaseModel
 from typing import List
-from user import User
-from location import Location
-from space import Space
-from booking import Booking
-from review import Review
-from admin import Administrator
-from config import db_config
-from client import Client
+from src.user import User
+from src.location import Location
+from src.space import Space
+from src.booking import Booking
+from src.review import Review
+from src.admin import Administrator
+from src.client import Client
 from fastapi.middleware.cors import CORSMiddleware
+import sys
 import os
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
+
+from src.config import db_config
 
 app = FastAPI()
 
@@ -31,10 +34,16 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all headers
 )
 
+app.mount("/images", StaticFiles(directory=os.path.join("..", "static", "images")), name="images")
 template_dir = os.path.join(os.path.dirname(__file__), "../front/html")
 
-
 templates = Jinja2Templates(directory=os.path.abspath(template_dir))
+
+
+async def startup():
+    pool = await aiomysql.create_pool(**db_config)
+    app.state.db_pool = pool
+    spaces = await Space.view_all_spaces(pool)
 
 
 @app.get("/", response_class=HTMLResponse)
