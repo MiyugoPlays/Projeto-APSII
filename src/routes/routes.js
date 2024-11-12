@@ -34,6 +34,11 @@ router.get('/sobre', (req, res) => {
     res.sendFile(path.join(__dirname, '../..', 'public', 'sobre.html'));
 });
 
+// Rota para a página de espaços cadastrados
+router.get('/espacos', (req, res) => {
+    res.sendFile(path.join(__dirname, '../..', 'public', 'espacos.html'));
+});
+
 // --------- Rotas de API ---------
 
 // Rota de cadastro de usuário (POST)
@@ -50,6 +55,9 @@ router.get('/verificar-autenticacao', verificarAutenticacao, (req, res) => {
     res.json({ autenticado: true }); // Responde que o usuário está autenticado
 });
 
+// Rota de API para listar todos os espaços
+router.get('/api/listarEspacos', espacoController.listarEspacos);
+
 // Rota de logout do usuário (GET)
 router.get('/logout', (req, res) => {
     res.clearCookie('usuarioId'); // Remove o cookie
@@ -62,14 +70,6 @@ router.get('/logout', (req, res) => {
 router.get('/meu-perfil', verificarAutenticacao, (req, res) => {
     res.sendFile(path.join(__dirname, '../..', 'public', 'perfil.html'));
 });
-
-// Rota para exibir os espaços (requer autenticação)
-router.get('/espacos', verificarAutenticacao, (req, res) => {
-    res.sendFile(path.join(__dirname, '../..', 'public', 'espacos.html'));
-});
-
-// Rota de API para listar todos os espaços
-router.get('/api/listarEspacos', verificarAutenticacao, espacoController.listarEspacos);
 
 // Rota de API para mostrar o perfil do usuário (requere autenticação)
 router.get('/api/mostrarPerfil', verificarAutenticacao, usuarioController.mostrarPerfil);
