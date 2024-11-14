@@ -22,9 +22,14 @@ const buscarPerfilUsuario = async (usuarioId) => {
   }
 };
 
+const atualizarPerfil = async (id, email, senha) => {
+  const result = await db.query('UPDATE usuarios SET email = ?, senha = ? WHERE id = ?', [email, senha, id]);
+  return result[0]; // Retorna o usuário atualizado
+};
 
 module.exports = {
     criarUsuario,
     procurarPeloEmail,
-    buscarPerfilUsuario
+    buscarPerfilUsuario,
+    atualizarPerfil
 }

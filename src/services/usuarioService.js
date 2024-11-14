@@ -31,9 +31,28 @@ const buscarPerfilUsuario = async (usuarioId) => {
   return await usuarioModel.buscarPerfilUsuario(usuarioId);
 };
 
+const atualizarPerfil = async (id, email, senha) => {
+    try {
+        // Chama o model para atualizar o perfil no banco de dados
+        const usuarioAtualizado = await usuarioModel.atualizarPerfil(id, email, senha);
+
+        if (!usuarioAtualizado) {
+            return null;  // Caso não tenha sido possível atualizar
+        }
+
+        return usuarioAtualizado;  // Retorna o usuário atualizado
+    } catch (err) {
+        console.error('Erro ao atualizar perfil:', err);
+        throw new Error('Erro ao atualizar perfil.');
+    }
+};
+
+
+
 module.exports = {
     cadastrarUsuario,
     autenticarUsuario,
     procurarPeloEmail,
-    buscarPerfilUsuario
+    buscarPerfilUsuario,
+    atualizarPerfil
 }

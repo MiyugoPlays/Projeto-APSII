@@ -74,6 +74,10 @@ router.get('/meu-perfil', verificarAutenticacao, (req, res) => {
 // Rota de API para mostrar o perfil do usuário (requere autenticação)
 router.get('/api/mostrarPerfil', verificarAutenticacao, usuarioController.mostrarPerfil);
 
+// Rota de api que faz atualizar o perfil
+router.put('/api/atualizarPerfil',verificarAutenticacao, usuarioController.atualizarPerfil);
+
+
 // --------- Página Inicial ---------
 
 // Rota para a página inicial (requer autenticação)

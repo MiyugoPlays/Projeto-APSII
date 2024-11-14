@@ -59,12 +59,41 @@ const mostrarPerfil = async (req, res) => {
       res.status(500).json({ message: 'Erro ao buscar perfil do usuário.' });
     }
 };
-  
+
+const atualizarPerfil = async (req, res) => {
+    const usuarioId = req.cookies.usuarioId;  // Pega o ID do usuário do cookie
+    const { email, senha } = req.body;  // Pega os novos dados de email e senha do corpo da requisição
+
+    if (!usuarioId) {
+        return res.status(401).json({ message: 'Usuário não autenticado.' });
+    }
+
+    try {
+        // Atualiza o perfil do usuário no banco de dados usando o ID do cookie
+        const usuarioAtualizado = await usuarioService.atualizarPerfil(usuarioId, email, senha);
+
+        if (!usuarioAtualizado) {
+            return res.status(404).json({ message: 'Usuário não encontrado ou não foi atualizado.' });
+        }
+
+        // Envia o perfil atualizado como resposta
+        res.json({
+            success: true,
+            message: 'Perfil atualizado com sucesso!',
+            user: usuarioAtualizado
+        });
+    } catch (error) {
+        console.error('Erro ao atualizar perfil:', error);
+        res.status(500).json({ message: 'Erro ao atualizar perfil.' });
+    }
+};
+
 
 
 module.exports = {
     cadastrar,
     login,
     verificarEmail,
-    mostrarPerfil
+    mostrarPerfil,
+    atualizarPerfil
 }
