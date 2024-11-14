@@ -25,3 +25,5 @@ const connection = mysql.createPool({
     queueLimit: 0
 });
 ```
+
+Os comandos pra gerar as tabelas do dabatase que estou usando está na pasta dump db
