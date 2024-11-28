@@ -39,7 +39,12 @@ router.get('/espacos', (req, res) => {
     res.sendFile(path.join(__dirname, '../..', 'public', 'espacos.html'));
 });
 
+router.get('/espaco/:id', (req, res) => {
+    res.sendFile(path.join(__dirname, '../..', 'public', 'sobre_espaco.html'));
+});
 // --------- Rotas de API ---------
+
+router.get('/api/espaco/:id', espacoController.obterEspacoPorId);
 
 // Rota de cadastro de usuário (POST)
 router.post('/cadastro', usuarioController.cadastrar);

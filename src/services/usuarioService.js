@@ -1,11 +1,8 @@
 const usuarioModel = require('../models/usuarioModel.js')
 
-const cadastrarUsuario = async (email, senha) => {
-    if (!email || !senha) {
-        throw new Error('Email e senha é obrigatorio')
-    }
-
-    const result = await usuarioModel.criarUsuario(email, senha)
+const cadastrarUsuario = async (nome, email, senha, telefone, dataNascimento) => {
+   
+    const result = await usuarioModel.criarUsuario(nome, email, senha, telefone, dataNascimento)
     return result
 }
 

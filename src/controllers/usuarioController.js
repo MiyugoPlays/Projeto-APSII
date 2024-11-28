@@ -1,17 +1,18 @@
 const usuarioService = require('../services/usuarioService');
 
 const cadastrar = async (req, res) => {
-    const {email, senha} = req.body
-
+    const { nome, email, senha, telefone, dataNascimento } = req.body;
+    
     try {
-        const result = await usuarioService.cadastrarUsuario(email, senha)
+        const result = await usuarioService.cadastrarUsuario(nome, email, senha, telefone, dataNascimento);
         const user = await usuarioService.autenticarUsuario(email, senha);
         res.cookie('usuarioId', user.id, { httpOnly: true });
-        res.status(201).json({ message: 'Usuario cadastrado com sucesso', userId: result.insertId})
+        res.status(201).json({ message: 'Usuario cadastrado com sucesso', userId: result.insertId });
     } catch (error) {
-        res.status(400).json({ message: error.message})
+        console.log('Erro ao cadastrar usuário:', error);
+        res.status(400).json({ message: error.message });
     }
-}
+};
 
 const login = async (req, res) => {
     const { email, senha } = req.body;

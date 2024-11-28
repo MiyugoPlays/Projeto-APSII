@@ -1,7 +1,7 @@
 const db = require('../db.js');
 
-const criarUsuario = async (email, senha) => {
-    const result = await db.query('INSERT INTO usuarios (email, senha) VALUES (?, ?)', [email, senha]);
+const criarUsuario = async (nome, email, senha, telefone, dataNascimento) => {
+    const result = await db.query('INSERT INTO usuarios (nome, email, senha, telefone, data_nascimento) VALUES (?, ?, ?, ?, ?)', [nome, email, senha, telefone, dataNascimento]);
     return result[0]; // Retorna o resultado da inserção
 };
 

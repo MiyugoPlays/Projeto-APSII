@@ -1,9 +1,21 @@
-const Espaco = require('../models/espacoModel.js')
+const espacoModel = require('../models/espacoModel.js')
 
 const obterEspacos = async () => {
-    return await Espaco.obterEspacos();
+    const result = await espacoModel.obterEspacos();
+    return result
+}
+
+async function obterEspacoPorId(id) {
+    try {
+        const espaco = await espacoModel.buscarPorId(id); // Chama o model para buscar o espaço no banco de dados
+        return espaco;
+    } catch (error) {
+        console.error('Erro no service ao buscar espaço:', error);
+        throw error;
+    }
 }
 
 module.exports = {
     obterEspacos,
+    obterEspacoPorId
 }

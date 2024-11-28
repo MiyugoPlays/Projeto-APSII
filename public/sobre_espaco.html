@@ -28,37 +28,14 @@
             </ul>
         </nav>
     </header>
-
     <div>
-        <h2>Meu Perfil</h2>
-        <div class="perfil-info">
-            <p><strong>Email:</strong> <span id="email"></span></p>
-            <p><strong>Senha:</strong> <span id="senha"></span></p>
-        </div>
-
-        <!-- Formulário de Edição Modal -->
-        <div id="editOverlay" class="hide">
-            <div id="editModal">
-                <h2>Editar Perfil</h2>
-                <form id="formEditPerfil">
-                    <input type="hidden" id="userId" name="id">
-                    <label for="editEmail">Email:</label>
-                    <input type="email" id="editEmail" name="email" required>
-                    
-                    <label for="editSenha">Senha:</label>
-                    <input type="password" id="editSenha" name="senha" required>
-                    
-                    <button type="submit">Salvar alterações</button>
-                </form>
-            </div>
-        </div>
-        
-        <!-- Botão de Editar -->
-        <button id="editButton" onclick="toggleEditForm()">Editar Perfil</button>
+        <h1 id="nome-espaco"></h1>
+        <img id="imagem-espaco" />
+        <p id="descricao-espaco"></p>
+        <p id="preco-espaco"></p>
     </div>
-
     <script src="/js/navigation.js"></script>
     <script src="/js/scriptHeader.js"></script>
-    <script src="/js/scriptPerfil.js"></script>
+    <script src="/js/scriptSobreEspaco.js"></script>
 </body>
 </html>
