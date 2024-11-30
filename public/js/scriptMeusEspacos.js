@@ -61,7 +61,8 @@ async function carregarEspacos(filtro) {
                 </div>
                 <div class="espaco-actions">
                     <button class="btn-edit" onclick="openEditModal(${espaco.id}, '${espaco.nome}', '${espaco.descricao}', ${espaco.capacidade}, ${preco.toFixed(2)})">Editar</button>
-                    <button class="btn-delete" onclick="deleteEspaco(${espaco.id})">Excluir</button>
+                    <button class="btn-delete" onclick="openDeleteModal()">Excluir</button>
+                    <button class="btn-ver-reservas" onclick="()">Ver reservas</button>
                 </div>
             `;
 
@@ -73,7 +74,6 @@ async function carregarEspacos(filtro) {
         alert('Ocorreu um erro ao carregar os espaços. Tente novamente mais tarde.');
     }
 }
-
 
 
 // Função para abrir o modal de edição do espaço
@@ -94,18 +94,36 @@ function openEditModal(espacoId, nome, descricao, capacidade, preco) {
 }
 
 
-
 // Função para fechar o modal de edição
 function closeEditModal() {
     document.getElementById("editOverlay").classList.add("hide");
     document.getElementById("editOverlay").classList.remove("show");
 }
 
+function openDeleteModal() {
+    document.getElementById("deleteOverlay").classList.remove("hide");
+    document.getElementById("deleteOverlay").classList.add("show");
+}
+
+function closeDeleteModal() {
+    document.getElementById("deleteOverlay").classList.add("hide");
+    document.getElementById("deleteOverlay").classList.remove("show");
+}
+
+function openAddModal() {
+    document.getElementById("addOverlay").classList.remove("hide");
+    document.getElementById("addOverlay").classList.add("show");
+}
+
+function closeAddModal() {
+    document.getElementById("addOverlay").classList.add("hide");
+    document.getElementById("addOverlay").classList.remove("show");
+}
+
 // Função para excluir o espaço
 function deleteEspaco(espacoId) {
     console.log("Deletando espaço ID:", espacoId);
-    // Lógica para excluir o espaço
-    alert(`Espaço com ID ${espacoId} seria excluído.`);
+     // Exibir o modal
 }
 
 // Função que será chamada ao clicar nos filtros de "Disponíveis" ou "Indisponíveis"
