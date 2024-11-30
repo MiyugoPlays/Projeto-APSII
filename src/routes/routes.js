@@ -44,6 +44,7 @@ router.get('/espaco/:id', (req, res) => {
 });
 // --------- Rotas de API ---------
 
+
 router.get('/api/espaco/:id', espacoController.obterEspacoPorId);
 
 // Rota de cadastro de usuário (POST)
@@ -76,11 +77,23 @@ router.get('/meu-perfil', verificarAutenticacao, (req, res) => {
     res.sendFile(path.join(__dirname, '../..', 'public', 'perfil.html'));
 });
 
+router.get('/minhas-reservas', verificarAutenticacao, (req, res) => {
+    res.sendFile(path.join(__dirname, '../..', 'public', 'minhas_reservas.html'));
+});
+
+router.get('/meus-espacos', verificarAutenticacao, (req, res) => {
+    res.sendFile(path.join(__dirname, '../..', 'public', 'meus_espacos.html'));
+});
+
 // Rota de API para mostrar o perfil do usuário (requere autenticação)
 router.get('/api/mostrarPerfil', verificarAutenticacao, usuarioController.mostrarPerfil);
 
 // Rota de api que faz atualizar o perfil
 router.put('/api/atualizarPerfil',verificarAutenticacao, usuarioController.atualizarPerfil);
+
+// Rota para listar os espaços de um usuário específico
+router.get('/api/listarEspacosPorUsuario',verificarAutenticacao, espacoController.listarEspacosPorUsuario); // Nova rota
+
 
 
 // --------- Página Inicial ---------

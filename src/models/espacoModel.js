@@ -19,7 +19,20 @@ async function buscarPorId(id) {
     }
 }
 
+// Função para buscar os espaços de um usuário específico
+async function buscarEspacosPorUsuario(usuarioId) {
+    try {
+        // Consulta SQL para buscar espaços que pertencem ao usuarioId
+        const [results] = await db.query('SELECT * FROM espacos WHERE usuario_id = ?', [usuarioId]);
+        return results;
+    } catch (err) {
+        console.error('Erro ao buscar espaços por usuário no model:', err);
+        throw new Error('Erro ao buscar espaços por usuário: ' + err.message);
+    }
+}
+
 module.exports = {
      obterEspacos,
-     buscarPorId
+     buscarPorId,
+     buscarEspacosPorUsuario
     } 

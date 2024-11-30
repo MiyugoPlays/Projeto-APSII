@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Reservas Salle</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/"> <h1> RESERVAS <br>SALLE</h1></a>
+            <ul>
+                <li><a href="/espacos">Espaços</a></li>
+                <li><a href="/sobre">Sobre</a></li>
+                <li>
+                    <a href="/login">
+                        <img src="/assets/contact.png" class="perfil">
+                        <span class="login-texto">Fazer Login</span>
+                    </a>
+                    <div id="dropdown" class="dropdown-content" style="display: none;">
+                        <a href="/meu-perfil">Meu Perfil</a>
+                        <a href="/minhas-reservas">Minhas Reservas</a>
+                        <a href="/meus-espacos">Meus Espaços</a>
+                        <a href="/logout" id="sair">Sair</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="containerx">
+        <section class="espacos-container">
+            <div class="header-actions">
+                <h2>Meus Espaços</h2>
+                <button id="btnAddEspaco" class="btn">Adicionar Novo Espaço</button>
+            </div>
+
+            <div class="espacos-toggle">
+                <span id="disponiveisText" class="espacos-toggle-item active" onclick="mostrarEspacos('disponiveis')">Disponíveis</span>
+                <span id="indisponiveisText" class="espacos-toggle-item" onclick="mostrarEspacos('indisponiveis')">Indisponíveis</span>
+            </div>
+
+            <div id="espacos-lista">
+                <!-- Os espaços serão inseridos aqui dinamicamente -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal de Edição de Espaço (Overlay) -->
+    <div id="editOverlay" class="hide">
+        <div id="editModal">
+            <h2>Editar Espaço</h2>
+            <form id="formEditEspaco">             
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+                
+                <label for="descricao">Descrição:</label>
+                <textarea id="descricao" name="descricao" required></textarea>
+
+                <label for="capacidade">Capacidade:</label>
+                <input type="number" id="capacidade" name="capacidade" required>
+
+                <label for="preco">Preço:</label>
+                <input type="text" id="preco" name="preco" required>
+
+                <button type="submit">Salvar Alterações</button>
+                <button type="button" id="cancelEdit" onclick="closeEditModal()">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação de Exclusão -->
+    <div id="deleteOverlay" class="hide">
+        <div id="deleteModal">
+            <h2>Tem certeza que deseja excluir este espaço?</h2>
+            <button id="confirmDelete">Sim, Excluir</button>
+            <button id="cancelDelete">Cancelar</button>
+        </div>
+    </div>
+
+    <script src="/js/navigation.js"></script>
+    <script src="/js/scriptHeader.js"></script>
+    <script src="/js/scriptMeusEspacos.js"></script>
+</body>
+</html>

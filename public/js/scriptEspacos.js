@@ -25,6 +25,12 @@ async function carregarEspacos() {
 
         // Loop pelos espaços e cria a estrutura HTML para cada um
         espacos.forEach(espaco => {
+
+            if (espaco.status !== 'disponivel') {
+                return; // Pula este espaço se não estiver disponível
+            }
+
+
             // Verificar se o espaço possui as propriedades necessárias
             if (!espaco.id || !espaco.nome || !espaco.imagem || !espaco.descricao || espaco.preco === undefined || espaco.preco === null) {
                 console.error('Espaço incompleto:', espaco);

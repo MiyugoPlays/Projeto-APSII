@@ -15,7 +15,19 @@ async function obterEspacoPorId(id) {
     }
 }
 
+// Função para listar os espaços de um usuário específico
+const listarEspacosPorUsuario = async (usuarioId) => {
+    try {
+        const espacos = await espacoModel.buscarEspacosPorUsuario(usuarioId); // Chama o model passando o usuarioId
+        return espacos;
+    } catch (error) {
+        console.error('Erro no service ao buscar espaços por usuário:', error);
+        throw error;
+    }
+};
+
 module.exports = {
     obterEspacos,
-    obterEspacoPorId
+    obterEspacoPorId,
+    listarEspacosPorUsuario
 }

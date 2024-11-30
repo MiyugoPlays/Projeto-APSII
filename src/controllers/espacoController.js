@@ -28,8 +28,30 @@ async function obterEspacoPorId(req, res) {
     }
 }
 
+const listarEspacosPorUsuario = async (req, res) => {
+    try {
+        const usuarioId = req.cookies.usuarioId; // Obtém o usuarioId do cookie (certifique-se de que está configurado corretamente)
+
+        if (!usuarioId) {
+            return res.status(401).json({ message: 'Usuário não autenticado' }); // Caso o cookie não esteja presente
+        }
+
+        const espacos = await espacoService.listarEspacosPorUsuario(usuarioId); // Passa o usuarioId para o service
+
+        if (espacos.length === 0) {
+            return res.status(404).json({ message: 'Nenhum espaço encontrado para este usuário' });
+        }
+
+        res.status(200).json(espacos); // Retorna os espaços encontrados
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Erro ao listar espaços do usuário');
+    }
+};
+
 module.exports = {
     listarEspacos,
-    obterEspacoPorId
+    obterEspacoPorId,
+    listarEspacosPorUsuario
 };
 
