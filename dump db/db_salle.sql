@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 28-Nov-2024 às 22:34
+-- Tempo de geração: 01-Dez-2024 às 01:07
 -- Versão do servidor: 5.7.36
 -- versão do PHP: 8.1.3
 
@@ -42,17 +42,22 @@ CREATE TABLE `espacos` (
   `estado_sigla` varchar(2) NOT NULL,
   `data_criacao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `preco` decimal(10,2) DEFAULT NULL,
-  `usuario_id` int(11) NOT NULL
+  `usuario_id` int(11) NOT NULL,
+  `status` enum('disponivel','indisponivel') NOT NULL DEFAULT 'disponivel'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `espacos`
 --
 
-INSERT INTO `espacos` (`id`, `nome`, `descricao`, `capacidade`, `imagem`, `cep`, `rua`, `numero`, `complemento`, `bairro`, `cidade`, `estado_sigla`, `data_criacao`, `preco`, `usuario_id`) VALUES
-(1, 'Restaurante ABC', 'Restaurante com comida variada', 100, '/assets/uploads/berserk.jpg', '12345-678', 'Rua A', '100', 'Apto 101', 'Centro', 'Cidade X', 'SP', '2024-11-28 16:46:01', '150.00', 2),
-(2, 'Café do Bairro', 'Café e lanches', 30, '/assets/uploads/dog.jpg', '23456-789', 'Rua B', '200', 'Bloco 2', 'Jardim', 'Cidade Y', 'RJ', '2024-11-28 16:46:01', '50.00', 2),
-(3, 'Pizzaria Bella', 'Pizzas de vários sabores', 50, '/assets/uploads/pig.jpg', '34567-890', 'Rua C', '300', NULL, 'Bela Vista', 'Cidade Z', 'MG', '2024-11-28 16:46:01', '120.00', 2);
+INSERT INTO `espacos` (`id`, `nome`, `descricao`, `capacidade`, `imagem`, `cep`, `rua`, `numero`, `complemento`, `bairro`, `cidade`, `estado_sigla`, `data_criacao`, `preco`, `usuario_id`, `status`) VALUES
+(1, 'Restaurante ABC', 'Restaurante com comida variada', 100, '/assets/uploads/berserk.jpg', '12345-678', 'Rua A', '100', 'Apto 101', 'Centro', 'Cidade X', 'SP', '2024-11-28 16:46:01', '150.00', 2, 'disponivel'),
+(2, 'Café do Bairro', 'Café e lanches', 30, '/assets/uploads/dog.jpg', '23456-789', 'Rua B', '200', 'Bloco 2', 'Jardim', 'Cidade Y', 'RJ', '2024-11-28 16:46:01', '50.00', 2, 'disponivel'),
+(3, 'Pizzaria Bella', 'Pizzas de vários sabores', 50, '/assets/uploads/pig.jpg', '34567-890', 'Rua C', '300', NULL, 'Bela Vista', 'Cidade Z', 'MG', '2024-11-28 16:46:01', '120.00', 2, 'disponivel'),
+(7, 'amigo', 'asd', 123, '/assets/uploads/1733011013294.jpg', '123123', 'rua magio', '123', '', 'bairro adc', 'sao paulo', 'SP', '2024-11-30 23:56:53', '150.00', 2, 'disponivel'),
+(8, 'ccc', 'ccc', 1, '/assets/uploads/1733012198612.png', '1231233', '1', '1', '', 'bairro adc', 'sao paulo', 'SP', '2024-12-01 00:16:38', '150.00', 2, 'disponivel'),
+(9, 'a', '1', 1, '/assets/uploads/1733014991478.jpg', '1', '1', '1', '', '1', 'a', 'SP', '2024-12-01 01:03:11', '150.00', 2, 'disponivel'),
+(10, 'v', 'v', 1, '/assets/uploads/1733015143689.jpg', 'v', 'v', '1', 'v', 'v', 'sao paulo', 'SP', '2024-12-01 01:05:43', '150.00', 2, 'disponivel');
 
 -- --------------------------------------------------------
 
@@ -94,8 +99,9 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `tipo_usuario`, `data_criacao`, `data_atualizacao`, `telefone`, `data_nascimento`) VALUES
-(2, 'amigo', 'amigo@gmail.com', '123', 0, '2024-11-28 16:27:15', '2024-11-28 16:27:15', '1123456', '2024-11-05'),
-(3, 'amigo', 'xxx@gmail.com', '123', 0, '2024-11-28 16:38:01', '2024-11-28 16:38:01', '112345655', '2024-11-12');
+(2, 'amigo', 'amigo@gmail.com', '123', 0, '2024-11-28 16:27:15', '2024-11-30 16:42:56', '1123456', '2024-11-05'),
+(3, 'amigo', 'xxx@gmail.com', '123', 0, '2024-11-28 16:38:01', '2024-11-28 16:38:01', '112345655', '2024-11-12'),
+(4, 'ccc', 'CCC@gmail.com', '123', 0, '2024-11-30 00:07:44', '2024-11-30 00:07:44', '1233333', '2024-11-01');
 
 --
 -- Índices para tabelas despejadas
@@ -132,7 +138,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `espacos`
 --
 ALTER TABLE `espacos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `reservas`
@@ -144,7 +150,7 @@ ALTER TABLE `reservas`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restrições para despejos de tabelas

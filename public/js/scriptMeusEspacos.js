@@ -1,3 +1,31 @@
+
+document.getElementById('formAddEspaco').addEventListener('submit', async (e) => {
+    e.preventDefault();  // Evita o envio padrão do formulário
+
+    // Coleta os dados do formulário
+    const form = document.getElementById('formAddEspaco');
+    const formData = new FormData(form);
+
+    try {
+        // Envia a requisição POST para a rota 'api/adicionarEspaco'
+        const response = await fetch('/api/adicionarEspaco', {
+            method: 'POST',
+            body: formData,  // Envia os dados como FormData
+        });
+
+        const data = await response.json();  // Recebe a resposta do servidor
+
+        if (response.ok) {
+            alert(data.message); // Mensagem de sucesso
+            window.location.reload();  
+        } else {
+            alert('Erro: ' + data.message); // Mensagem de erro
+        }
+    } catch (error) {
+        alert('Erro ao cadastrar o espaço: ' + error.message);
+    }
+});
+
 // Função principal que carrega os espaços de acordo com o filtro
 async function carregarEspacos(filtro) {
     try {
@@ -75,7 +103,6 @@ async function carregarEspacos(filtro) {
     }
 }
 
-
 // Função para abrir o modal de edição do espaço
 function openEditModal(espacoId, nome, descricao, capacidade, preco) {
         console.log("Abrindo modal de edição para o espaço ID:", espacoId);
@@ -92,7 +119,6 @@ function openEditModal(espacoId, nome, descricao, capacidade, preco) {
         document.getElementById("editOverlay").classList.add("show");
   
 }
-
 
 // Função para fechar o modal de edição
 function closeEditModal() {
@@ -136,3 +162,4 @@ function mostrarEspacos(filtro) {
 window.onload = function() {
     mostrarEspacos('disponiveis');
 };
+

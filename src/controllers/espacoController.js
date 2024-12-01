@@ -49,9 +49,58 @@ const listarEspacosPorUsuario = async (req, res) => {
     }
 };
 
+// Função para adicionar um novo espaço
+const adicionarEspaco = async (req, res) => {
+    try {
+        // Obtém os dados do formulário
+        const { nome, descricao, capacidade, preco, cep, rua, numero, complemento, bairro, cidade, estado_sigla } = req.body;
+
+        // Verifica se a imagem foi enviada
+        if (!req.file) {
+            return res.status(400).json({ message: 'A imagem do espaço é obrigatória.' });
+        }
+
+        // O caminho da imagem será o nome do arquivo armazenado
+        const imagem = '/assets/uploads/' + req.file.filename;
+
+        // O status será sempre "disponivel" na criação
+        const status = 'disponivel';
+
+        // Aqui, estamos assumindo que o usuário está autenticado e o ID do usuário está disponível na sessão.
+        const usuario_id = req.cookies.usuarioId;
+
+        // Preparando os dados para envio ao serviço
+        const dadosEspaco = {
+            nome,
+            descricao,
+            capacidade,
+            preco,
+            cep,
+            rua,
+            numero,
+            complemento,
+            bairro,
+            cidade,
+            estado_sigla,
+            status,
+            imagem,
+            usuario_id
+        };
+
+        // Chamando o serviço para adicionar o espaço no banco de dados
+        const novoEspaco = await espacoService.adicionarEspaco(dadosEspaco);
+
+        res.status(201).json({ message: 'Espaço adicionado com sucesso!', espaco: novoEspaco });
+    } catch (error) {
+        console.error('Erro ao adicionar espaço:', error);
+        res.status(500).json({ message: 'Erro ao adicionar o espaço.' });
+    }
+};
+
 module.exports = {
     listarEspacos,
     obterEspacoPorId,
-    listarEspacosPorUsuario
+    listarEspacosPorUsuario,
+    adicionarEspaco
 };
 

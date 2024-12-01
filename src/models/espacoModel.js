@@ -31,8 +31,34 @@ async function buscarEspacosPorUsuario(usuarioId) {
     }
 }
 
+// Função para adicionar um novo espaço no banco de dados
+async function adicionarEspaco(dadosEspaco) {
+    const { nome, descricao, capacidade, preco, cep, rua, numero, complemento, bairro, cidade, estado_sigla, status, imagem, usuario_id } = dadosEspaco;
+
+    try {
+        // Consulta SQL para inserir o novo espaço no banco de dados
+        const query = `
+            INSERT INTO espacos (nome, descricao, capacidade, preco, cep, rua, numero, complemento, bairro, cidade, estado_sigla, status, imagem, usuario_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `;
+
+        // Array de valores a serem passados para a query
+        const values = [nome, descricao, capacidade, preco, cep, rua, numero, complemento, bairro, cidade, estado_sigla, status, imagem, usuario_id];
+
+        // Executa a query no banco
+        const [result] = await db.query(query, values);
+
+        // Retorna os dados do novo espaço inserido (incluindo o ID gerado)
+        return { ...dadosEspaco, id: result.insertId };
+    } catch (error) {
+        console.error('Erro ao adicionar espaço no model:', error);
+        throw new Error('Erro ao adicionar espaço no banco de dados');
+    }
+}
+
 module.exports = {
      obterEspacos,
      buscarPorId,
-     buscarEspacosPorUsuario
+     buscarEspacosPorUsuario,
+     adicionarEspaco
     } 

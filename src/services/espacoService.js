@@ -26,8 +26,39 @@ const listarEspacosPorUsuario = async (usuarioId) => {
     }
 };
 
+// Função para adicionar um novo espaço no banco de dados
+const adicionarEspaco = async (dadosEspaco) => {
+    const { nome, descricao, capacidade, preco, cep, rua, numero, complemento, bairro, cidade, estado_sigla, status, imagem, usuario_id } = dadosEspaco;
+
+    try {
+        // Chama o model para adicionar o espaço no banco de dados
+        const result = await espacoModel.adicionarEspaco({
+            nome,
+            descricao,
+            capacidade,
+            preco,
+            cep,
+            rua,
+            numero,
+            complemento,
+            bairro,
+            cidade,
+            estado_sigla,
+            status,
+            imagem,
+            usuario_id
+        });
+
+        return result;
+    } catch (error) {
+        console.error('Erro ao adicionar espaço no service:', error);
+        throw error;
+    }
+};
+
 module.exports = {
     obterEspacos,
     obterEspacoPorId,
-    listarEspacosPorUsuario
+    listarEspacosPorUsuario,
+    adicionarEspaco
 }
