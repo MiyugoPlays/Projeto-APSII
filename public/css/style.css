@@ -172,6 +172,8 @@ body {
   border-radius: 8px;
   width: 400px;
   max-width: 90%;
+  max-height: 80vh; /* Garante que o modal não ocupe mais que 80% da altura da tela */
+  overflow-y: auto; /* Permite o scroll quando o conteúdo for maior que o espaço disponível */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -179,7 +181,7 @@ body {
   margin-top: 0;
 }
 
-#editModal input, #editModal textarea {
+#editModal input, #editModal textarea, #editModal select {
   width: 100%;
   margin: 10px 0;
   padding: 10px;

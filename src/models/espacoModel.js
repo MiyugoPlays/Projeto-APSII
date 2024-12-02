@@ -56,9 +56,52 @@ async function adicionarEspaco(dadosEspaco) {
     }
 }
 
+async function editarEspaco(id, dadosEspaco) {
+    const { editnome, editdescricao, editcapacidade, editpreco, editcep, editrua, editnumero, editcomplemento, editbairro, editcidade, editestado_sigla, editimagem } = dadosEspaco;
+
+    try {
+        // Preparar a query de atualização
+        const query = `
+            UPDATE espacos 
+            SET nome = ?, descricao = ?, capacidade = ?, preco = ?, cep = ?, rua = ?, numero = ?, complemento = ?, bairro = ?, cidade = ?, estado_sigla = ?, imagem = ?
+            WHERE id = ?
+        `;
+        
+        const values = [
+            editnome, 
+            editdescricao, 
+            editcapacidade, 
+            editpreco, 
+            editcep, 
+            editrua, 
+            editnumero, 
+            editcomplemento, 
+            editbairro, 
+            editcidade, 
+            editestado_sigla, 
+            editimagem,  // Passa a imagem (pode ser atualizada ou a mesma)
+            id
+        ];
+
+        const [result] = await db.query(query, values);
+
+        // Verifica se algum registro foi atualizado
+        if (result.affectedRows === 0) {
+            return null; // Nenhum registro foi atualizado
+        }
+
+        return { id, ...dadosEspaco }; // Retorna o espaço atualizado
+    } catch (error) {
+        console.error('Erro ao editar espaço no model:', error);
+        throw new Error('Erro ao editar espaço no banco de dados');
+    }
+}
+
+
 module.exports = {
      obterEspacos,
      buscarPorId,
      buscarEspacosPorUsuario,
-     adicionarEspaco
+     adicionarEspaco,
+     editarEspaco
     } 

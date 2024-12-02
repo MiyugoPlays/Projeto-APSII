@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 01-Dez-2024 às 01:07
+-- Tempo de geração: 02-Dez-2024 às 01:59
 -- Versão do servidor: 5.7.36
 -- versão do PHP: 8.1.3
 
@@ -51,13 +51,13 @@ CREATE TABLE `espacos` (
 --
 
 INSERT INTO `espacos` (`id`, `nome`, `descricao`, `capacidade`, `imagem`, `cep`, `rua`, `numero`, `complemento`, `bairro`, `cidade`, `estado_sigla`, `data_criacao`, `preco`, `usuario_id`, `status`) VALUES
-(1, 'Restaurante ABC', 'Restaurante com comida variada', 100, '/assets/uploads/berserk.jpg', '12345-678', 'Rua A', '100', 'Apto 101', 'Centro', 'Cidade X', 'SP', '2024-11-28 16:46:01', '150.00', 2, 'disponivel'),
+(1, 'Restaurante ABZz', 'Restaurante com comida variada', 100, '/assets/uploads/berserk.jpg', '12345-678', 'Rua A', '100', 'Apto 101', 'Centro', 'Cidade X', 'SP', '2024-11-28 16:46:01', '150.00', 2, 'disponivel'),
 (2, 'Café do Bairro', 'Café e lanches', 30, '/assets/uploads/dog.jpg', '23456-789', 'Rua B', '200', 'Bloco 2', 'Jardim', 'Cidade Y', 'RJ', '2024-11-28 16:46:01', '50.00', 2, 'disponivel'),
 (3, 'Pizzaria Bella', 'Pizzas de vários sabores', 50, '/assets/uploads/pig.jpg', '34567-890', 'Rua C', '300', NULL, 'Bela Vista', 'Cidade Z', 'MG', '2024-11-28 16:46:01', '120.00', 2, 'disponivel'),
-(7, 'amigo', 'asd', 123, '/assets/uploads/1733011013294.jpg', '123123', 'rua magio', '123', '', 'bairro adc', 'sao paulo', 'SP', '2024-11-30 23:56:53', '150.00', 2, 'disponivel'),
+(7, 'amigolegal', 'asd', 123, '/assets/uploads/1733011013294.jpg', '123123', 'rua magio', '123', '', 'bairro adc', 'sao paulo', 'SP', '2024-11-30 23:56:53', '150.00', 2, 'disponivel'),
 (8, 'ccc', 'ccc', 1, '/assets/uploads/1733012198612.png', '1231233', '1', '1', '', 'bairro adc', 'sao paulo', 'SP', '2024-12-01 00:16:38', '150.00', 2, 'disponivel'),
-(9, 'a', '1', 1, '/assets/uploads/1733014991478.jpg', '1', '1', '1', '', '1', 'a', 'SP', '2024-12-01 01:03:11', '150.00', 2, 'disponivel'),
-(10, 'v', 'v', 1, '/assets/uploads/1733015143689.jpg', 'v', 'v', '1', 'v', 'v', 'sao paulo', 'SP', '2024-12-01 01:05:43', '150.00', 2, 'disponivel');
+(9, 'aaaaa', '1', 1, '/assets/uploads/1733103332175.jpg', '1', '1', '1', '', '1', 'a', 'SP', '2024-12-01 01:03:11', '150.00', 2, 'disponivel'),
+(10, 'v', 'vv', 1, '/assets/uploads/1733015143689.jpg', 'v', 'v', '1', 'v', 'v', 'sao paulo', 'SP', '2024-12-01 01:05:43', '300.00', 2, 'disponivel');
 
 -- --------------------------------------------------------
 
