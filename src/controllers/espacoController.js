@@ -143,11 +143,43 @@ const editarEspaco = async (req, res) => {
     }
 };
 
+const excluirEspaco = async (req, res) => {
+    const espacoId = req.params.id; // Obtém o ID do espaço a ser excluído da URL
+    const usuarioId = req.cookies.usuarioId; // Obtém o ID do usuário autenticado
+
+    try {
+        // Verifica se o espaço existe
+        const espaco = await espacoService.obterEspacoPorId(espacoId);
+
+        if (!espaco) {
+            return res.status(404).json({ message: 'Espaço não encontrado' });
+        }
+        
+        console.log(espaco.usuario_id)
+        console.log(usuarioId)
+
+        // Verifica se o usuário é o proprietário do espaço
+        if (Number(espaco.usuario_id) !== Number(usuarioId)) {
+            return res.status(403).json({ message: 'Você não tem permissão para excluir este espaço.' });
+        }
+
+        // Chama o serviço para excluir o espaço
+        await espacoService.excluirEspaco(espacoId);
+
+        res.status(200).json({ message: 'Espaço excluído com sucesso!' });
+    } catch (error) {
+        console.error('Erro ao excluir espaço:', error);
+        res.status(500).json({ message: 'Erro ao excluir o espaço' });
+    }
+};
+
+
 module.exports = {
     listarEspacos,
     obterEspacoPorId,
     listarEspacosPorUsuario,
     adicionarEspaco,
-    editarEspaco
+    editarEspaco,
+    excluirEspaco
 };
 

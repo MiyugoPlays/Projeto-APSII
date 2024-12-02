@@ -83,10 +83,21 @@ const editarEspaco = async (dadosEspaco) => {
     }
 };
 
+const excluirEspaco = async (id) => {
+    try {
+        const resultado = await espacoModel.excluirEspaco(id); // Chama o model para excluir o espaço
+        return resultado;
+    } catch (error) {
+        console.error('Erro ao excluir espaço no service:', error);
+        throw error;
+    }
+};
+
 module.exports = {
     obterEspacos,
     obterEspacoPorId,
     listarEspacosPorUsuario,
     adicionarEspaco,
-    editarEspaco
+    editarEspaco,
+    excluirEspaco
 }

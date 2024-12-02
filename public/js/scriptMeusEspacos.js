@@ -89,7 +89,7 @@ async function carregarEspacos(filtro) {
                 </div>
                 <div class="espaco-actions">
                     <button class="btn-edit" onclick="openEditModal(${espaco.id}, '${espaco.nome.replace("'", "\\'")}', '${espaco.descricao.replace("'", "\\'")}', ${espaco.capacidade}, ${preco.toFixed(2)}, '${espaco.cep}', '${espaco.rua}', '${espaco.numero}', '${espaco.complemento}', '${espaco.bairro}', '${espaco.cidade}', '${espaco.estado_sigla}', '${espaco.imagem}', '${espaco.status}')">Editar</button>
-                    <button class="btn-delete" onclick="openDeleteModal()">Excluir</button>
+                    <button class="btn-delete" onclick="openDeleteModal(${espaco.id})">Excluir</button>
                     <button class="btn-ver-reservas" onclick="()">Ver reservas</button>
                 </div>
             `;
@@ -138,7 +138,10 @@ function closeEditModal() {
     document.getElementById("editOverlay").classList.remove("show");
 }
 
-function openDeleteModal() {
+function openDeleteModal(espacoId) {
+    console.log("Abrindo modal de exclusão para o espaço ID:", espacoId);
+    // Guardar o ID do espaço para exclusão
+    document.getElementById("confirmDelete").onclick = () => confirmarExclusao(espacoId);
     document.getElementById("deleteOverlay").classList.remove("hide");
     document.getElementById("deleteOverlay").classList.add("show");
 }
@@ -197,6 +200,25 @@ async function editarEspaco() {
     } catch (error) {
         // Se houver erro na requisição (como rede ou servidor), exibe a mensagem de erro
         alert('Erro ao editar o espaço: ' + error);
+    }
+}
+
+async function confirmarExclusao(espacoId) {
+    try {
+        const response = await fetch(`/api/excluirEspaco/${espacoId}`, {
+            method: 'DELETE'
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert(data.message);
+            window.location.reload();  // Recarregar a página após a exclusão
+        } else {
+            alert('Erro: ' + data.message);
+        }
+    } catch (error) {
+        alert('Erro ao excluir o espaço: ' + error.message);
     }
 }
 

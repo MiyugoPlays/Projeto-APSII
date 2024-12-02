@@ -129,6 +129,9 @@ router.get('/meu-perfil', verificarAutenticacao, (req, res) => {
     res.sendFile(path.join(__dirname, '../..', 'public', 'perfil.html'));
 });
 
+// Rota privada para excluir um espaço (requere autenticação)
+router.delete('/api/excluirEspaco/:id', verificarAutenticacao, espacoController.excluirEspaco);
+
 router.post('/api/adicionarEspaco', verificarAutenticacao, (req, res, next) => {
     // Usar o middleware de upload de imagem
     upload(req, res, (err) => {

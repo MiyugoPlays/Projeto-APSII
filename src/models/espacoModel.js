@@ -97,11 +97,30 @@ async function editarEspaco(id, dadosEspaco) {
     }
 }
 
+// Função para excluir um espaço do banco de dados
+async function excluirEspaco(id) {
+    try {
+        // Query SQL para excluir o espaço com o ID fornecido
+        const query = 'DELETE FROM espacos WHERE id = ?';
+        const [result] = await db.query(query, [id]);
+
+        // Verifica se algum registro foi excluído
+        if (result.affectedRows === 0) {
+            throw new Error('Nenhum espaço encontrado para excluir');
+        }
+
+        return result;
+    } catch (error) {
+        console.error('Erro ao excluir espaço no model:', error);
+        throw new Error('Erro ao excluir o espaço no banco de dados');
+    }
+}
 
 module.exports = {
      obterEspacos,
      buscarPorId,
      buscarEspacosPorUsuario,
      adicionarEspaco,
-     editarEspaco
+     editarEspaco,
+     excluirEspaco
     } 
