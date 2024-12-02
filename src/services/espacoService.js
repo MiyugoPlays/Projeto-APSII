@@ -56,9 +56,37 @@ const adicionarEspaco = async (dadosEspaco) => {
     }
 };
 
+const editarEspaco = async (dadosEspaco) => {
+    const { id, editnome, editdescricao, editcapacidade, editpreco, editcep, editrua, editnumero, editcomplemento, editbairro, editcidade, editestado_sigla, editimagem } = dadosEspaco;
+
+    try {
+        // Atualiza o espaço com os dados recebidos
+        const espacoAtualizado = await espacoModel.editarEspaco(id, {
+            editnome,
+            editdescricao,
+            editcapacidade,
+            editpreco,
+            editcep,
+            editrua,
+            editnumero,
+            editcomplemento,
+            editbairro,
+            editcidade,
+            editestado_sigla,
+            editimagem
+        });
+
+        return espacoAtualizado;
+    } catch (error) {
+        console.error('Erro ao editar espaço no service:', error);
+        throw error;
+    }
+};
+
 module.exports = {
     obterEspacos,
     obterEspacoPorId,
     listarEspacosPorUsuario,
-    adicionarEspaco
+    adicionarEspaco,
+    editarEspaco
 }

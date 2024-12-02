@@ -50,6 +50,23 @@ const upload = multer({
     }
 }).single('imagem'); // O campo 'imagem' será usado no formulário (form-data)
 
+const uploadEdit = multer({
+    storage: storage,
+    limits: { fileSize: 5 * 1024 * 1024 }, // Limite de 5MB
+    fileFilter: (req, file, cb) => {
+        // Validando se o arquivo é uma imagem
+        const filetypes = /jpeg|jpg|png|gif/;
+        const mimetype = filetypes.test(file.mimetype);
+        const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+
+        if (mimetype && extname) {
+            return cb(null, true);
+        } else {
+            return cb('Erro: Apenas imagens JPEG, JPG, PNG ou GIF são permitidas!');
+        }
+    }
+}).single('editimagem');
+
 
 
 // --------- Rotas Públicas (sem necessidade de autenticação) ---------
@@ -121,6 +138,16 @@ router.post('/api/adicionarEspaco', verificarAutenticacao, (req, res, next) => {
         next(); // Se o upload for bem-sucedido, chama o próximo middleware
     });
 }, espacoController.adicionarEspaco);
+
+router.put('/api/editarEspaco/:id', verificarAutenticacao, (req, res, next) => {
+    // Usar o middleware de upload de imagem
+    uploadEdit(req, res, (err) => {
+        if (err) {
+            return res.status(400).json({ message: err });
+        }
+        next(); // Se o upload for bem-sucedido, chama o próximo middleware
+    });
+}, espacoController.editarEspaco);
 
 router.get('/minhas-reservas', verificarAutenticacao, (req, res) => {
     res.sendFile(path.join(__dirname, '../..', 'public', 'minhas_reservas.html'));

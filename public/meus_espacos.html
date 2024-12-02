@@ -51,20 +51,54 @@
     <div id="editOverlay" class="hide">
         <div id="editModal">
             <h2>Editar Espaço</h2>
-            <form id="formEditEspaco">             
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" required>
+            <form id="formEditEspaco"  enctype="multipart/form-data">
+                <label for="editid">ID:</label>
+                <input type="text" id="editid" name="editid" disabled>
                 
-                <label for="descricao">Descrição:</label>
-                <textarea id="descricao" name="descricao" required></textarea>
+                <label for="editnome">Nome:</label>
+                <input type="text" id="editnome" name="editnome" required>
 
-                <label for="capacidade">Capacidade:</label>
-                <input type="number" id="capacidade" name="capacidade" required>
+                <label for="editdescricao">Descrição:</label>
+                <textarea id="editdescricao" name="editdescricao" required></textarea>
 
-                <label for="preco">Preço:</label>
-                <input type="text" id="preco" name="preco" required>
+                <label for="editcapacidade">Capacidade:</label>
+                <input type="number" id="editcapacidade" name="editcapacidade" required>
 
-                <button type="submit">Salvar Alterações</button>
+                <label for="editimagem">Imagem:</label>
+                <input type="file" id="editimagem" name="editimagem">
+
+                <label for="editcep">CEP:</label>
+                <input type="text" id="editcep" name="editcep" required>
+
+                <label for="editrua">Rua:</label>
+                <input type="text" id="editrua" name="editrua" required>
+
+                <label for="editnumero">Número:</label>
+                <input type="text" id="editnumero" name="editnumero" required>
+
+                <label for="editcomplemento">Complemento:</label>
+                <input type="text" id="editcomplemento" name="editcomplemento">
+
+                <label for="editbairro">Bairro:</label>
+                <input type="text" id="editbairro" name="editbairro" required>
+
+                <label for="editcidade">Cidade:</label>
+                <input type="text" id="editcidade" name="editcidade" required>
+
+                <label for="editestado_sigla">Estado (Sigla):</label>
+                <input type="text" id="editestado_sigla" name="editestado_sigla" required>
+
+                <label for="editpreco">Preço:</label>
+                <input type="number" id="editpreco" name="editpreco" step="0.01" required>
+
+                <label for="editstatus">Status:</label>
+                <select id="editstatus" name="editstatus" required>
+                    <option value="disponivel">Disponível</option>
+                    <option value="indisponivel">Indisponível</option>
+                </select>
+
+                <!-- Botões de ação -->
+                <button type="submit" onclick="editarEspaco()">Salvar Alterações</button>
                 <button type="button" id="cancelEdit" onclick="closeEditModal()">Cancelar</button>
             </form>
         </div>

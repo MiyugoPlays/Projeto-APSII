@@ -88,7 +88,7 @@ async function carregarEspacos(filtro) {
                     <p>Preço: R$ ${preco.toFixed(2)}</p>
                 </div>
                 <div class="espaco-actions">
-                    <button class="btn-edit" onclick="openEditModal(${espaco.id}, '${espaco.nome}', '${espaco.descricao}', ${espaco.capacidade}, ${preco.toFixed(2)})">Editar</button>
+                    <button class="btn-edit" onclick="openEditModal(${espaco.id}, '${espaco.nome.replace("'", "\\'")}', '${espaco.descricao.replace("'", "\\'")}', ${espaco.capacidade}, ${preco.toFixed(2)}, '${espaco.cep}', '${espaco.rua}', '${espaco.numero}', '${espaco.complemento}', '${espaco.bairro}', '${espaco.cidade}', '${espaco.estado_sigla}', '${espaco.imagem}', '${espaco.status}')">Editar</button>
                     <button class="btn-delete" onclick="openDeleteModal()">Excluir</button>
                     <button class="btn-ver-reservas" onclick="()">Ver reservas</button>
                 </div>
@@ -104,20 +104,32 @@ async function carregarEspacos(filtro) {
 }
 
 // Função para abrir o modal de edição do espaço
-function openEditModal(espacoId, nome, descricao, capacidade, preco) {
-        console.log("Abrindo modal de edição para o espaço ID:", espacoId);
-        console.log(nome, descricao, capacidade, preco);
+function openEditModal(espacoId, nome, descricao, capacidade, preco, cep, rua, numero, complemento, bairro, cidade, estadoSigla, imagem, status) {
+    console.log("Abrindo modal de edição para o espaço ID:", espacoId);
+    console.log(nome, descricao, capacidade, preco, cep, rua, numero, complemento, bairro, cidade, estadoSigla, imagem, status);
 
-        // Preencher os campos do modal com os dados do espaço diretamente
-        document.getElementById('nome').value = nome;
-        document.getElementById('descricao').value = descricao;
-        document.getElementById('capacidade').value = capacidade;
-        document.getElementById('preco').value = preco;
+    // Preencher os campos do modal com os dados do espaço diretamente
+    document.getElementById('editid').value = espacoId;
+    document.getElementById('editnome').value = nome;
+    document.getElementById('editdescricao').value = descricao;
+    document.getElementById('editcapacidade').value = capacidade;
+    document.getElementById('editpreco').value = preco;
+    document.getElementById('editcep').value = cep;
+    document.getElementById('editrua').value = rua;
+    document.getElementById('editnumero').value = numero;
+    document.getElementById('editcomplemento').value = complemento;
+    document.getElementById('editbairro').value = bairro;
+    document.getElementById('editcidade').value = cidade;
+    document.getElementById('editestado_sigla').value = estadoSigla;
+    document.getElementById('editstatus').value = status;
 
-        // Exibir o modal
-        document.getElementById("editOverlay").classList.remove("hide");
-        document.getElementById("editOverlay").classList.add("show");
-  
+
+    
+    // Exibir o modal
+    document.getElementById("editOverlay").classList.remove("hide");
+    document.getElementById("editOverlay").classList.add("show");
+   
+
 }
 
 // Função para fechar o modal de edição
@@ -156,6 +168,36 @@ function deleteEspaco(espacoId) {
 function mostrarEspacos(filtro) {
     console.log(`Função mostrarEspacos chamada com o filtro: ${filtro}`);
     carregarEspacos(filtro);
+}
+
+// Função para editar o espaço
+async function editarEspaco() {
+    // Coleta os dados do formulário de edição
+    const form = document.getElementById('formEditEspaco');
+    const formData = new FormData(form);
+
+    const espacoId = document.getElementById('editid').value;
+
+    try {
+        const response = await fetch(`/api/editarEspaco/${espacoId}`, {
+            method: 'PUT',
+            body: formData,  // Envia os dados com FormData (incluindo arquivos)
+        });
+
+        // Apenas lê a resposta JSON uma vez
+        const data = await response.json();
+
+        if (response.ok) {
+            alert(data.message); // Mensagem de sucesso
+        } else {
+            // Caso haja erro, exibe a mensagem de erro retornada pela API
+            alert('Erro: ' + data.message || 'Erro desconhecido');
+        }
+
+    } catch (error) {
+        // Se houver erro na requisição (como rede ou servidor), exibe a mensagem de erro
+        alert('Erro ao editar o espaço: ' + error);
+    }
 }
 
 // Inicializa com o filtro de "Disponíveis"

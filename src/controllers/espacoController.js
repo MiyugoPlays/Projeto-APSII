@@ -97,10 +97,57 @@ const adicionarEspaco = async (req, res) => {
     }
 };
 
+const editarEspaco = async (req, res) => {
+    try {
+    
+        const espacoId = req.params.id;
+        const { editnome, editdescricao, editcapacidade, editpreco, editcep, editrua, editnumero, editcomplemento, editbairro, editcidade, editestado_sigla } = req.body;
+
+        // Verifica se a imagem foi enviada, se não, mantém a imagem atual
+        const editimagem = req.file ? '/assets/uploads/' + req.file.filename : null;
+
+         // Recupera o espaço atual do banco de dados para pegar a imagem atual
+         const espacoAtual = await espacoService.obterEspacoPorId(espacoId);
+         const imagemAtual = espacoAtual ? espacoAtual.imagem : null;
+ 
+          // Se nenhuma imagem for fornecida, usa a imagem atual do banco de dados
+          const imagemFinal = editimagem || imagemAtual;
+
+        const dadosEspaco = {
+            id: espacoId,  // Inclui o ID do espaço
+            editnome,
+            editdescricao,
+            editcapacidade,
+            editpreco,
+            editcep,
+            editrua,
+            editnumero,
+            editcomplemento,
+            editbairro,
+            editcidade,
+            editestado_sigla,
+            editimagem: imagemFinal
+        };
+
+        // Passa os dados para o service
+        const espacoAtualizado = await espacoService.editarEspaco(dadosEspaco);
+
+        if (!espacoAtualizado) {
+            return res.status(404).json({ message: 'Espaço não encontrado' });
+        }
+
+        res.status(200).json({ message: 'Espaço atualizado com sucesso', espaco: espacoAtualizado });
+    } catch (error) {
+        console.error('Erro ao editar espaço:', error);
+        res.status(500).json({ message: 'Erro ao editar o espaço' });
+    }
+};
+
 module.exports = {
     listarEspacos,
     obterEspacoPorId,
     listarEspacosPorUsuario,
-    adicionarEspaco
+    adicionarEspaco,
+    editarEspaco
 };
 
