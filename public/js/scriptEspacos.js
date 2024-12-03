@@ -51,6 +51,7 @@ async function carregarEspacos() {
             divEspaco.innerHTML = `
                 <a href="/espaco/${espaco.id}" class="espaco-link">
                     <img src="${espaco.imagem}" alt="${espaco.nome}" class="espaco-img">
+                    
                     <h3>${espaco.nome}</h3>
                     <p>${espaco.descricao}</p>
                     <p>Preço: R$ ${preco.toFixed(2)}</p>

@@ -8,6 +8,7 @@ async function carregarEspaco() {
         }
 
         const espaco = await response.json();
+        console.log(espaco)
         
         const preco = parseFloat(espaco.preco);
         if (isNaN(preco)) {
@@ -18,6 +19,13 @@ async function carregarEspaco() {
         document.getElementById('nome-espaco').textContent = espaco.nome;
         document.getElementById('descricao-espaco').textContent = espaco.descricao;
         document.getElementById('imagem-espaco').src = espaco.imagem;
+        document.getElementById('bairro-espaco').textContent = espaco.bairro;
+        document.getElementById('capacidade-espaco').textContent = espaco.capacidade;
+        document.getElementById('cidade-espaco').textContent = espaco.cidade;
+        document.getElementById('estado-espaco').textContent = espaco.estado_sigla;
+        document.getElementById('rua-espaco').textContent = espaco.rua;
+        document.getElementById('comple-espaco').textContent = espaco.complemento;
+        document.getElementById('num-espaco').textContent = espaco.numero;
         document.getElementById('preco-espaco').textContent = `Preço: R$ ${preco.toFixed(2)}`;
         
         // Atualizando o link do botão "Reservar"
