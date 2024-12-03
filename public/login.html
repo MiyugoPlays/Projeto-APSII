@@ -4,22 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styleLogin.css">
+    <link rel="stylesheet" href="/css/header-footer.css">
     <title>Login</title>
 </head>
 <body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="/"> <h1> RESERVAS <br>SALLE</h1></a>
+            <ul>
+                <li><a href="/espacos">Espaços</a></li>
+                <li><a href="/sobre">Sobre</a></li>
+                <li>
+                    <div id="dropdown" class="dropdown-content" style="display: none;">
+                        <a href="/meu-perfil">Meu Perfil</a>
+                        <a href="/minhas-reservas">Minhas Reservas</a>
+                        <a href="/meus-espacos">Meus Espaços</a>
+                        <a href="/logout" id="sair">Sair</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main content -->
     <main>
         <section>
             <form id="loginForm" class="container" action="" method="POST">
                 <h2>LOGIN</h2>
-                Email: <input type="email" name="" id="email" required>
-                Senha: <input type="password" name="" id="senha" required>
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" required>
+                
+                <label for="senha">Senha:</label>
+                <input type="password" name="senha" id="senha" required>
+                
                 <button type="submit">Login</button>
                 <p id="mensagem"></p>
                 <a href="/cadastro">Criar Conta</a>
             </form>
-       
         </section>
     </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>2024 Reservas Salle. Todos os direitos reservados.</p>
+    </footer>
+
     <script src="\js\scriptLogin.js"></script>
 </body>
 </html>

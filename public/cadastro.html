@@ -4,27 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
-    <link rel="stylesheet" href="\css\styleLogin.css">
+    <link rel="stylesheet" href="/css/cadastro.css">
+    <link rel="stylesheet" href="/css/header-footer.css">
 </head>
 <body>
+    <header>
+        <nav>
+            <a href="/"> <h1> RESERVAS <br>SALLE</h1></a>
+            <ul>
+                <li><a href="/espacos">Espaços</a></li>
+                <li><a href="/sobre">Sobre</a></li>
+                <li>
+                    <div id="dropdown" class="dropdown-content" style="display: none;">
+                        <a href="/meu-perfil">Meu Perfil</a>
+                        <a href="/minhas-reservas">Minhas Reservas</a>
+                        <a href="/meus-espacos">Meus Espaços</a>
+                        <a href="/logout" id="sair">Sair</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    
     <main>
         <section>
-            <form id="cadastroForm" class="container" action="" method="POST">
+            <div class="container">
                 <h2>Cadastro</h2>
-                Nome: <input type="text" name="nome" id="nome" required>
-                Telefone: <input type="tel" name="telefone" id="telefone">
-                Data de nascimento: <input type="date" name="data_nascimento" id="data_nascimento" required>
-                Email: <input type="email" name="email" id="email" required>
-                Senha: <input type="password" name="senha" id="senha" required>
-                Digite novamente a senha: <input type="password" name="confirmarSenha" id="confirmarSenha" required>
-                <button type="submit" onclick="validarCampos()">Cadastrar</button>
-                <p id="mensagem"></p>
-                <a href="/login">Possui conta? Clique aqui para logar</a>
-            </form>
-       
+                <form id="cadastroForm" action="" method="POST">
+                    <input type="text" name="nome" id="nome" placeholder="Nome completo" required>
+                    <input type="tel" name="telefone" id="telefone" placeholder="Telefone" required>
+                    <input type="date" name="data_nascimento" id="data_nascimento" required>
+                    <input type="email" name="email" id="email" placeholder="Email" required>
+                    <input type="password" name="senha" id="senha" placeholder="Senha" required>
+                    <input type="password" name="confirmarSenha" id="confirmarSenha" placeholder="Confirmar senha" required>
+                    <button type="submit" onclick="validarCampos()">Cadastrar</button>
+                    <p id="mensagem"></p>
+                </form>
+                <a href="/login">Já possui conta? Clique aqui para logar</a>
+            </div>
         </section>
     </main>
-    <script src="/js/scriptCadastro.js">
-    </script>
+
+    <footer>
+        <p>2024 Reservas Salle. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="/js/scriptCadastro.js"></script>
 </body>
 </html>

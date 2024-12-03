@@ -1,17 +1,68 @@
-section {
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Main Section Styling */
+main {
+    flex: 1;
+    background-color: #f9f9f9;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    padding: 50px 20px;
 }
 
 .container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 2rem;
-    /* Adicione um pouco de espaço entre os elementos se necessário */
-    gap: 1rem;
+    align-items: center;
+    text-align: center;
 }
 
-/* Outros estilos... */
+.container h2 {
+    margin-bottom: 20px;
+}
+
+.container input, .container button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.container input {
+    margin-bottom: 15px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+a {
+    text-decoration: none;
+    color: #007BFF;
+    margin-top: 10px;
+    display: block;
+}
+
+a:hover {
+    text-decoration: underline;
+}

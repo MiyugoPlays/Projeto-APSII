@@ -4,9 +4,9 @@ const mysql = require('mysql2/promise');
 // Configuração da conexão
 const connection = mysql.createPool({
     host: 'localhost',
-    user: 'root',
-    password: 'usbw',
-    database: 'db_salle',
+    user: 'guilde',
+    password: 'amongus@420',
+    database: 'reservas_salle',
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
