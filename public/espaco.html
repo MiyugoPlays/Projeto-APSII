@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espacos</title>
+    
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="/css/espaco.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>RESERVAS <br> Apartamento no Centro </h1>
+            <ul>
+                <li><a href="espacos.html">Espaços</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><img src="assets/contact.png" class="perfil" alt="Perfil"></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <div class="property-details">
+                <h2>Apartamento no Centro</h2>
+                <p class="price">R$120/noite</p>
+                <p class="description">Desfrute de uma estadia tranquila neste apartamento no centro, cercado pela conveniência da cidade. Perfeito para uma escapada romântica ou um retiro em família.</p>
+
+                <div class="booking-section">
+                    <h2>Reserve sua estadia</h2>
+                    <form>
+                        <label for="checkin">Check-in:</label>
+                        <input type="date" id="checkin" name="checkin" required>
+
+                        <label for="checkout">Check-out:</label>
+                        <input type="date" id="checkout" name="checkout" required>
+
+                        <label for="guests">Hóspedes:</label>
+                        <input type="number" id="guests" name="guests" min="1" value="1" required>
+
+                        <button type="submit">Fazer Reserva</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="image-gallery">
+            <img src="assets/main.avif" alt="Apartamento" class="property-image">
+            <img src="assets/sec.avif" alt="Sala" class="property-image">
+            <img src="assets/kitchen.avif" alt="Cozinha" class="property-image">
+        </section>
+
+        <section class="amenities">
+            <h2>Comodidades</h2>
+            <ul>
+                <li>Wi-Fi</li>
+                <li>Cozinha</li>
+                <li>Estacionamento Grátis</li>
+                <li>Aceita Animais</li>
+                <li>TV</li>
+            </ul>
+        </section>
+
+        <section class="reviews">
+            <h2>Avaliações</h2>
+            <div class="review">
+                <p><strong>Rodrigo Faro</strong> - ⭐⭐⭐⭐⭐</p>
+                <p>“Absolutamente amei minha estadia! O apartamento estava limpo e tinha tudo que precisávamos.”</p>
+            </div>
+            <div class="review">
+                <p><strong>Maria da Silva</strong> - ⭐⭐⭐⭐</p>
+                <p>“Ótima localização e muito aconchegante. Com certeza voltarei!”</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>2024 Reservas Apartamento no Centro. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Link to external JavaScript -->
+    <script src="/js/espaco.js"></script>
+</body>
+</html>
