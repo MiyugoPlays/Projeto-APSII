@@ -1,0 +1,17 @@
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    /* Adicione um pouco de espaço entre os elementos se necessário */
+    gap: 1rem;
+}
+
+/* Outros estilos... */
