@@ -54,6 +54,8 @@ body {
     width: 100%;
     justify-content: space-between; /* Espaça os itens do nav */
     align-items: center; /* Alinha os itens verticalmente ao centro */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave apenas na parte de baixo */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Opcional, pode ajudar a separar visualmente */
   }
   
   nav h1 {

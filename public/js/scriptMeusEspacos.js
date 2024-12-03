@@ -56,49 +56,54 @@ async function carregarEspacos(filtro) {
 
         lista.innerHTML = ''; // Limpa a lista antes de adicionar novos itens
 
-        // Loop pelos espaços e cria a estrutura HTML para cada um
-        espacos.forEach(espaco => {
-            // Verifica se o espaço corresponde ao filtro selecionado
-            if (filtro === 'disponiveis' && espaco.status !== 'disponivel') {
-                console.log(`Espaço ${espaco.id} não está disponível, filtrando.`);
-                return; // Pula o espaço se o status não for o filtro
-            }
+        if (espacos.length === 0){
+            lista.innerHTML = "<p>Você não possui nenhum espaço cadastrado.</p>";
+        } else{
+            // Loop pelos espaços e cria a estrutura HTML para cada um
+            espacos.forEach(espaco => {
+                // Verifica se o espaço corresponde ao filtro selecionado
+                if (filtro === 'disponiveis' && espaco.status !== 'disponivel') {
+                    console.log(`Espaço ${espaco.id} não está disponível, filtrando.`);
+                    return; // Pula o espaço se o status não for o filtro
+                }
 
-            if (filtro === 'indisponiveis' && espaco.status !== 'indisponivel') {
-                console.log(`Espaço ${espaco.id} não está indisponível, filtrando.`);
-                return; // Pula o espaço se o status não for o filtro
-            }
+                if (filtro === 'indisponiveis' && espaco.status !== 'indisponivel') {
+                    console.log(`Espaço ${espaco.id} não está indisponível, filtrando.`);
+                    return; // Pula o espaço se o status não for o filtro
+                }
 
-            // Certifique-se de que o preço é um número válido
-            const preco = parseFloat(espaco.preco);
-            if (isNaN(preco)) {
-                console.error('Preço inválido para o espaço:', espaco);
-                return; // Pula este espaço se o preço não for válido
-            }
+                // Certifique-se de que o preço é um número válido
+                const preco = parseFloat(espaco.preco);
+                if (isNaN(preco)) {
+                    console.error('Preço inválido para o espaço:', espaco);
+                    return; // Pula este espaço se o preço não for válido
+                }
 
-            // Criando o HTML para cada espaço
-            const divEspaco = document.createElement('div');
-            divEspaco.classList.add('espaco'); // Classe para estilizar
+                // Criando o HTML para cada espaço
+                const divEspaco = document.createElement('div');
+                divEspaco.classList.add('espaco'); // Classe para estilizar
 
-            divEspaco.innerHTML = `
-                <div class="espaco-info">
-                    <h3>${espaco.nome}</h3>
-                    <p>${espaco.descricao}</p>
-                    <p>Capacidade: ${espaco.capacidade}</p>
-                    <p>Preço: R$ ${preco.toFixed(2)}</p>
-                </div>
-                <div class="espaco-actions">
-                    <button class="btn-edit" onclick="openEditModal(${espaco.id}, '${espaco.nome.replace("'", "\\'")}', '${espaco.descricao.replace("'", "\\'")}', ${espaco.capacidade}, ${preco.toFixed(2)}, '${espaco.cep}', '${espaco.rua}', '${espaco.numero}', '${espaco.complemento}', '${espaco.bairro}', '${espaco.cidade}', '${espaco.estado_sigla}', '${espaco.imagem}', '${espaco.status}')">Editar</button>
-                    <button class="btn-delete" onclick="openDeleteModal(${espaco.id})">Excluir</button>
-                    <a href="/meus-espacos/${espaco.id}/reservas/" class="btn-ver-reservas">
-                        <button>Ver reservas</button>
-                    </a>
-                </div>
-            `;
+                divEspaco.innerHTML = `
+                    <div class="espaco-info">
+                        <h3>${espaco.nome}</h3>
+                        <p>${espaco.descricao}</p>
+                        <p>Capacidade: ${espaco.capacidade}</p>
+                        <p>Preço: R$ ${preco.toFixed(2)}</p>
+                    </div>
+                    <div class="espaco-actions">
+                        <button class="btn-edit" onclick="openEditModal(${espaco.id}, '${espaco.nome.replace("'", "\\'")}', '${espaco.descricao.replace("'", "\\'")}', ${espaco.capacidade}, ${preco.toFixed(2)}, '${espaco.cep}', '${espaco.rua}', '${espaco.numero}', '${espaco.complemento}', '${espaco.bairro}', '${espaco.cidade}', '${espaco.estado_sigla}', '${espaco.imagem}', '${espaco.status}')">Editar</button>
+                        <button class="btn-delete" onclick="openDeleteModal(${espaco.id})">Excluir</button>
+                        <a href="/meus-espacos/${espaco.id}/reservas/" class="btn-ver-reservas">
+                            <button>Ver reservas</button>
+                        </a>
+                    </div>
+                `;
 
-            // Adiciona a divEspaco dentro da lista
-            lista.appendChild(divEspaco);
-        });
+                // Adiciona a divEspaco dentro da lista
+                lista.appendChild(divEspaco);
+            });
+        }
+        
     } catch (error) {
         console.error('Erro ao carregar espaços:', error);
         alert('Ocorreu um erro ao carregar os espaços. Tente novamente mais tarde.');
@@ -176,31 +181,44 @@ function mostrarEspacos(filtro) {
 }
 
 // Função para editar o espaço
-async function editarEspaco() {
+async function editarEspaco(event) {
+    // Previne o envio padrão do formulário
+    event.preventDefault();
+
     // Coleta os dados do formulário de edição
     const form = document.getElementById('formEditEspaco');
     const formData = new FormData(form);
 
+    for (let [key, value] of formData.entries()) {
+        console.log(key, value);  // Exibe chave e valor de cada campo enviado
+    }
+    // Coleta o ID do espaço
     const espacoId = document.getElementById('editid').value;
 
     try {
+        
+        // Envia a requisição PUT com os dados do formulário
         const response = await fetch(`/api/editarEspaco/${espacoId}`, {
             method: 'PUT',
             body: formData,  // Envia os dados com FormData (incluindo arquivos)
         });
 
-        // Apenas lê a resposta JSON uma vez
+        // Lê a resposta JSON
         const data = await response.json();
 
         if (response.ok) {
-            alert(data.message); // Mensagem de sucesso
+            // Exibe a mensagem de sucesso
+            alert(data.message || 'Espaço atualizado com sucesso!');
+            // Fechar o modal ou atualizar a página
+            closeEditModal();
+            mostrarEspacos('disponiveis');
         } else {
-            // Caso haja erro, exibe a mensagem de erro retornada pela API
-            alert('Erro: ' + data.message || 'Erro desconhecido');
+            // Exibe a mensagem de erro caso haja falha na atualização
+            alert('Erro: ' + (data.message || 'Erro desconhecido'));
         }
 
     } catch (error) {
-        // Se houver erro na requisição (como rede ou servidor), exibe a mensagem de erro
+        // Caso haja erro na requisição (rede ou servidor), exibe o erro
         alert('Erro ao editar o espaço: ' + error);
     }
 }

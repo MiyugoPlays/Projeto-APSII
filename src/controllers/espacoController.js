@@ -1,4 +1,5 @@
 const espacoService = require('../services/espacoService');
+const reservasService = require('../services/reservasService.js');
 
 const listarEspacos = async (req, res) => {
     try {
@@ -32,17 +33,10 @@ const listarEspacosPorUsuario = async (req, res) => {
     try {
         const usuarioId = req.cookies.usuarioId; // Obtém o usuarioId do cookie (certifique-se de que está configurado corretamente)
 
-        if (!usuarioId) {
-            return res.status(401).json({ message: 'Usuário não autenticado' }); // Caso o cookie não esteja presente
-        }
-
         const espacos = await espacoService.listarEspacosPorUsuario(usuarioId); // Passa o usuarioId para o service
 
-        if (espacos.length === 0) {
-            return res.status(404).json({ message: 'Nenhum espaço encontrado para este usuário' });
-        }
 
-        res.status(200).json(espacos); // Retorna os espaços encontrados
+        res.json(espacos); // Retorna os espaços encontrados
     } catch (error) {
         console.error(error);
         res.status(500).send('Erro ao listar espaços do usuário');
@@ -53,7 +47,7 @@ const listarEspacosPorUsuario = async (req, res) => {
 const adicionarEspaco = async (req, res) => {
     try {
         // Obtém os dados do formulário
-        const { nome, descricao, capacidade, preco, cep, rua, numero, complemento, bairro, cidade, estado_sigla } = req.body;
+        const { nome, descricao, capacidade, preco, cep, rua, numero, complemento, bairro, cidade, estado_sigla, status } = req.body;
 
         // Verifica se a imagem foi enviada
         if (!req.file) {
@@ -62,9 +56,6 @@ const adicionarEspaco = async (req, res) => {
 
         // O caminho da imagem será o nome do arquivo armazenado
         const imagem = '/assets/uploads/' + req.file.filename;
-
-        // O status será sempre "disponivel" na criação
-        const status = 'disponivel';
 
         // Aqui, estamos assumindo que o usuário está autenticado e o ID do usuário está disponível na sessão.
         const usuario_id = req.cookies.usuarioId;
@@ -99,19 +90,22 @@ const adicionarEspaco = async (req, res) => {
 
 const editarEspaco = async (req, res) => {
     try {
-    
         const espacoId = req.params.id;
-        const { editnome, editdescricao, editcapacidade, editpreco, editcep, editrua, editnumero, editcomplemento, editbairro, editcidade, editestado_sigla } = req.body;
+        const { 
+            editnome, editdescricao, editcapacidade, editpreco, editcep, editrua, 
+            editnumero, editcomplemento, editbairro, editcidade, editestado_sigla, 
+            editstatus  // Adicionando o campo status
+        } = req.body;
 
         // Verifica se a imagem foi enviada, se não, mantém a imagem atual
         const editimagem = req.file ? '/assets/uploads/' + req.file.filename : null;
 
-         // Recupera o espaço atual do banco de dados para pegar a imagem atual
-         const espacoAtual = await espacoService.obterEspacoPorId(espacoId);
-         const imagemAtual = espacoAtual ? espacoAtual.imagem : null;
- 
-          // Se nenhuma imagem for fornecida, usa a imagem atual do banco de dados
-          const imagemFinal = editimagem || imagemAtual;
+        // Recupera o espaço atual do banco de dados para pegar a imagem atual
+        const espacoAtual = await espacoService.obterEspacoPorId(espacoId);
+        const imagemAtual = espacoAtual ? espacoAtual.imagem : null;
+
+        // Se nenhuma imagem for fornecida, usa a imagem atual do banco de dados
+        const imagemFinal = editimagem || imagemAtual;
 
         const dadosEspaco = {
             id: espacoId,  // Inclui o ID do espaço
@@ -126,6 +120,7 @@ const editarEspaco = async (req, res) => {
             editbairro,
             editcidade,
             editestado_sigla,
+            editstatus,  // Adicionando o campo status
             editimagem: imagemFinal
         };
 
@@ -173,6 +168,23 @@ const excluirEspaco = async (req, res) => {
     }
 };
 
+const listarReservasDoEspaco = async (req, res) => {
+    const espacoId = req.params.espacoId;
+    
+    try {
+        // Obter todas as reservas do espaço
+        const reservas = await reservasService.listarReservasDoEspaco(espacoId);
+
+        if (!reservas || reservas.length === 0) {
+            return res.status(404).json({ message: 'Nenhuma reserva encontrada para este espaço.' });
+        }
+
+        return res.status(200).json(reservas);
+    } catch (error) {
+        console.error('Erro ao listar reservas do espaço:', error);
+        return res.status(500).json({ message: 'Erro ao listar as reservas do espaço.' });
+    }
+};
 
 module.exports = {
     listarEspacos,
@@ -180,6 +192,7 @@ module.exports = {
     listarEspacosPorUsuario,
     adicionarEspaco,
     editarEspaco,
-    excluirEspaco
+    excluirEspaco,
+    listarReservasDoEspaco
 };
 

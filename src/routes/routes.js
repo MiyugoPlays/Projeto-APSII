@@ -180,6 +180,15 @@ router.get('/api/listarEspacosPorUsuario',verificarAutenticacao, espacoControlle
 
 router.get('/api/espaco/:id/reservas', verificarAutenticacao, reservasController.listarReservasDoEspaco);
 
+router.get('/api/minhas-reservas/', verificarAutenticacao, reservasController.listarReservasDoUsuario);
+
+router.put('/api/reservas/:id/status', verificarAutenticacao, reservasController.alterarStatusReserva);
+
+router.get('/api/espacos/:espacoId/reservas', verificarAutenticacao, espacoController.listarReservasDoEspaco);
+
+// Rota para realizar a reserva de um espaço
+router.post('/api/reservar-espaco/:id', reservasController.reservarEspaco);
+
 // --------- Página Inicial ---------
 
 // Rota para a página inicial (requer autenticação)

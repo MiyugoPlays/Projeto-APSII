@@ -13,7 +13,7 @@ const procurarPeloEmail = async (email) => {
 // Função para buscar os dados do usuário
 const buscarPerfilUsuario = async (usuarioId) => {
   try {
-    const [results] = await db.query('SELECT senha, email FROM usuarios WHERE id = ?', [usuarioId]);
+    const [results] = await db.query('SELECT senha, email, nome, telefone FROM usuarios WHERE id = ?', [usuarioId]);
 
     return results[0]; // Retorna o primeiro resultado (o usuário encontrado)
   } catch (err) {

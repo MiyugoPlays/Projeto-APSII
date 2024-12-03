@@ -57,7 +57,7 @@ const adicionarEspaco = async (dadosEspaco) => {
 };
 
 const editarEspaco = async (dadosEspaco) => {
-    const { id, editnome, editdescricao, editcapacidade, editpreco, editcep, editrua, editnumero, editcomplemento, editbairro, editcidade, editestado_sigla, editimagem } = dadosEspaco;
+    const { id, editnome, editdescricao, editcapacidade, editpreco, editcep, editrua, editnumero, editcomplemento, editbairro, editcidade, editestado_sigla, editstatus, editimagem } = dadosEspaco;
 
     try {
         // Atualiza o espaço com os dados recebidos
@@ -73,6 +73,7 @@ const editarEspaco = async (dadosEspaco) => {
             editbairro,
             editcidade,
             editestado_sigla,
+            editstatus,
             editimagem
         });
 

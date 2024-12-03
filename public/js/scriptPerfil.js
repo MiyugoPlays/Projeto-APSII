@@ -13,10 +13,12 @@ function carregarPerfil() {
             alert(data.message);
             return;
         }
-
+        
         // Preencher os campos com os dados do usuário no perfil
         document.getElementById('email').textContent = data.email;
         document.getElementById('senha').textContent = data.senha;
+        document.getElementById('nome').textContent = data.nome;
+        document.getElementById('tel').textContent = data.telefone;
 
         // Preencher os campos do formulário de edição (modal)
         document.getElementById('editEmail').value = data.email;

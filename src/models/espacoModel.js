@@ -57,13 +57,19 @@ async function adicionarEspaco(dadosEspaco) {
 }
 
 async function editarEspaco(id, dadosEspaco) {
-    const { editnome, editdescricao, editcapacidade, editpreco, editcep, editrua, editnumero, editcomplemento, editbairro, editcidade, editestado_sigla, editimagem } = dadosEspaco;
+    const { 
+        editnome, editdescricao, editcapacidade, editpreco, editcep, editrua, 
+        editnumero, editcomplemento, editbairro, editcidade, editestado_sigla, 
+        editstatus, editimagem 
+    } = dadosEspaco;
 
     try {
-        // Preparar a query de atualização
+        // Preparar a query de atualização com o campo status
         const query = `
             UPDATE espacos 
-            SET nome = ?, descricao = ?, capacidade = ?, preco = ?, cep = ?, rua = ?, numero = ?, complemento = ?, bairro = ?, cidade = ?, estado_sigla = ?, imagem = ?
+            SET nome = ?, descricao = ?, capacidade = ?, preco = ?, cep = ?, rua = ?, 
+                numero = ?, complemento = ?, bairro = ?, cidade = ?, estado_sigla = ?, 
+                status = ?, imagem = ?
             WHERE id = ?
         `;
         
@@ -79,6 +85,7 @@ async function editarEspaco(id, dadosEspaco) {
             editbairro, 
             editcidade, 
             editestado_sigla, 
+            editstatus,  // Agora incluímos o campo status
             editimagem,  // Passa a imagem (pode ser atualizada ou a mesma)
             id
         ];
