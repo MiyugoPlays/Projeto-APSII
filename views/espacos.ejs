@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espaços Disponíveis</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Espaços Disponíveis</h1>
+
+    <div class="espacos-container">
+        <% espacos.forEach(function(espaco) { %>
+            <div class="espaco-card">
+                <img src="<%= espaco.imagem %>" alt="<%= espaco.nome %> Image" class="espaco-image">
+                <h2><%= espaco.nome %></h2>
+                <p><strong>Descrição:</strong> <%= espaco.descricao %></p>
+                <p><strong>Capacidade:</strong> <%= espaco.capacidade %> pessoas</p>
+                <p><strong>Preço:</strong> R$ <%= espaco.preco.toFixed(2) %></p>
+                <p><strong>Endereço:</strong> <%= espaco.rua %>, <%= espaco.numero %>, <%= espaco.bairro %>, <%= espaco.cidade %> - <%= espaco.estado_sigla %></p>
+                <p><strong>Status:</strong> <%= espaco.status %></p>
+                <p><strong>CEP:</strong> <%= espaco.cep %></p>
+            </div>
+        <% }); %>
+    </div>
+
+    <style>
+        .espacos-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-around;
+        }
+        .espaco-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .espaco-card img {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+        .espaco-card h2 {
+            margin-top: 10px;
+        }
+    </style>
+</body>
+</html>

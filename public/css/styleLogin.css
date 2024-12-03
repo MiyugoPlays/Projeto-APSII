@@ -1,4 +1,8 @@
 html, body {
+    background-image: url('../assets/fundomain.jpg'); /* Path to your background image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     height: 100%;
     margin: 0;
     font-family: Arial, sans-serif;
@@ -7,11 +11,14 @@ html, body {
 /* Main Section Styling */
 main {
     flex: 1;
-    background-color: #f9f9f9;
+    /* Remove or adjust background-color to make it transparent */
+    background-color: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 50px 20px;
+    /* Optional: add a slight background overlay */
+    /* background: rgba(255, 255, 255, 0.8); */
 }
 
 .container {

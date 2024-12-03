@@ -15,7 +15,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Usar as rotas
-app.use('/', routes);
+app.use('/', require('./routes/routes.js'));
+
+// Route to get "Espaços" data from the database
+app.get('/espacos', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/espacos.html'));
+});
 
 // Iniciar o servidor
 app.listen(PORT, () => {
