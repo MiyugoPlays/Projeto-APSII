@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="\css\style.css">
+    <title>Reservas Salle</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/"> <h1> RESERVAS <br>SALLE</h1></a>
+            <ul>
+                <li><a href="/espacos">Espaços</a></li>
+                <li><a href="/sobre">Sobre</a></li>
+                <li>
+                    <a href="/login">
+                        <img src="/assets/contact.png" class="perfil">
+                        <span class="login-texto">Fazer Login</span>
+                    </a>
+                    <div id="dropdown" class="dropdown-content" style="display: none;">
+                        <a href="/meu-perfil">Meu Perfil</a>
+                        <a href="/minhas-reservas">Minhas Reservas</a>
+                        <a href="/meus-espacos">Meus Espaços</a>
+                        <a href="/logout" id="sair">Sair</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container-perfil">
+        <h2>Meu Perfil</h2>
+        <div class="perfil-info">
+            <p><strong>Nome</strong> <span id="nome"></span></p>
+            <p><strong>Telefone:</strong> <span id="tel"></span></p>
+            <p><strong>Email:</strong> <span id="email"></span></p>
+            <p><strong>Senha:</strong> <span id="senha"></span></p>
+        </div>
+
+        <!-- Formulário de Edição Modal -->
+        <div id="editOverlay" class="hide">
+            <div id="editModal">
+                <h2>Editar Perfil</h2>
+                <form id="formEditPerfil">
+                    <input type="hidden" id="userId" name="id">
+                    <label for="editEmail">Email:</label>
+                    <input type="email" id="editEmail" name="email" required>
+                    
+                    <label for="editSenha">Senha:</label>
+                    <input type="password" id="editSenha" name="senha" required>
+                    
+                    <button type="submit">Salvar alterações</button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Botão de Editar -->
+        <button id="editButton" onclick="toggleEditForm()">Editar Perfil</button>
+    </div>
+
+    <script src="/js/navigation.js"></script>
+    <script src="/js/scriptHeader.js"></script>
+    <script src="/js/scriptPerfil.js"></script>
+</body>
+</html>

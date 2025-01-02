@@ -1,35 +1,29 @@
-# Servidor back
-**DEPENDENCIAS**:
-- python3
-- pip               
-- aiomysql          
-- annotated-types   
-- anyio
-- click             
-- fastapi           
-- h11               
-- idna              
-- pydantic          
-- pydantic_core     
-- PyMySQL           
-- sniffio           
-- starlette         
-- typing_extensions 
-- uvicorn           
+<h1>Instruções para rodar o projeto</h1>
+<p>Para rodar o código é necessario:</p>
+<ul>
+    <li>Node.Js</li>
+    <li>Servidor MySQL</li>
+</ul>
 
-Utilize o comando abaixo para instalar as dependencias caso necessario:
-**Linux/MacOS**:
-```bash
-pip install -r requirements.txt
+<p>Para rodar o server é necessario rodar no Terminal o seguinte comando:</p>
+
+```
+npm run dev
 ```
 
-Voce pode installar no windows usando powershell: 
-**Windows**:
-```bash
-pip install -r requirements.txt
+<h2>OBSERVAÇÃO</h2>
+
+Provavelmente para rodar corretamente o projeto, vai ser necessário mudar a conexão do banco de dados, para isso basta acessar o src/db.js e mudar os seguintes campos:
+```
+const connection = mysql.createPool({
+    host: 'NOME_DO_SERVIDOR_LOCAL',
+    user: 'NOME_DO_USUARIO_DO_SERVER_DO_DB',
+    password: 'SENHA_DO_SERVER_DO_DB',
+    database: 'NOME_DO_DB',
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+});
 ```
 
-Por equanto e necessario o servidor estar rodando para o funcionamento do front-end e back-end
-
-# Banco de dados
-E necessario prover seu usuario e senha do bd no 'spython/src/config.py' para o servidor funcionar
+Os comandos pra gerar as tabelas do dabatase que estou usando está na pasta dump db

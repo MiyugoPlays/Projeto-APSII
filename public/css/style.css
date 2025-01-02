@@ -1,0 +1,824 @@
+html, body{
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+  
+  header {
+    display: flex; /* Torna o header um flex container */
+    justify-content: space-between; /* Distribui os itens uniformemente, com espaço entre eles */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    background-color: white;
+    padding: 5px;
+  }
+
+  .dropdown-content {
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 0;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+#sair {
+  color: red;
+}
+  
+  .perfil {
+    height: 30px;
+    width: 30px;
+    margin: 5px;
+  }
+  
+  nav {
+    display: flex;
+    width: 100%;
+    justify-content: space-between; /* Espaça os itens do nav */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave apenas na parte de baixo */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Opcional, pode ajudar a separar visualmente */
+  }
+  
+  nav h1 {
+    margin: 0;
+  }
+  
+  nav ul {
+    display: flex; /* Torna a lista um flex container */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+  }
+  
+  nav li {
+    margin: 0 10px;
+    
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #333;
+    margin: 15px;
+    display: flex;
+    align-items: center;
+  }
+  
+  main {
+    flex: 1;
+    background-image: url('../assets/fundomain.jpg'); /* Substitua por o caminho da sua imagem */
+    background-size: cover; /* Ajusta a imagem para cobrir todo o elemento */
+    background-position: center; /* Centraliza a imagem */
+    /* Outras propriedades opcionais: */
+    background-repeat: no-repeat; /* Impede que a imagem se repita */
+    background-attachment: fixed; /* Faz com que a imagem permaneça fixa enquanto o usuário rola a página */
+    position: relative;
+    }
+
+  
+  section {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+  }
+
+  section input, section button {
+    box-sizing: border-box; /* Garante que padding e border não aumentem o tamanho */
+  padding: 0px 10px;
+  margin: 10px;
+  width: 300px;
+  height: 40px;
+  text-align: center;
+  }
+
+  .container {
+    background-color: rgba(255, 255, 255, 0.9);
+    margin-left: 10%; 
+    padding: 1.2rem;
+    padding-bottom: 20%;
+    padding-top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+  
+  input {
+    border: 1px solid #ccc;
+  }
+  
+  button {
+    background-color: #a7d7ff;
+    color: black;
+    border: none;
+    cursor: pointer;
+  }
+
+  footer {
+    text-align: center;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: white;
+    background-color: rgb(255, 255, 255, 0); /* Transparência de 50% */
+    position: absolute;
+    z-index: 1; /* Garante que o footer fique sobre a imagem */
+  }
+
+.espacos-container button {
+  box-sizing: border-box; /* Garante que padding e border não aumentem o tamanho */
+  padding: 0px 10px;
+  margin: 10px;
+  width: 300px;
+  height: 40px;
+  text-align: center;
+}
+  
+  /* Estilo do Modal de Edição */
+#editOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+  display: none; /* Esconde inicialmente */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Garante que o modal fique sobre o conteúdo */
+  transition: opacity 0.3s ease-in-out; /* Transição suave */
+}
+
+#editModal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  max-height: 80vh; /* Garante que o modal não ocupe mais que 80% da altura da tela */
+  overflow-y: auto; /* Permite o scroll quando o conteúdo for maior que o espaço disponível */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#editModal h2 {
+  margin-top: 0;
+}
+
+#editModal input, #editModal textarea, #editModal select {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#editModal button {
+  width: 100%;
+  padding: 10px;
+  background-color: #a7d7ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#editModal button:hover {
+  background-color: #6a94b7;
+}
+
+/* Mostrar o modal de edição quando necessário */
+#editOverlay.show {
+  display: flex; /* Exibe o overlay */
+  opacity: 1; /* Torna o overlay totalmente visível */
+}
+
+#editOverlay.hide {
+  opacity: 0; /* Torna invisível quando escondido */
+  pointer-events: none; /* Impede interação com o fundo enquanto oculto */
+}
+
+/* Estilo do Modal de Exclusão */
+#deleteOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+  display: none; /* Esconde inicialmente */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: opacity 0.3s ease-in-out; /* Transição suave */
+}
+
+#deleteModal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+#deleteModal h2 {
+  margin-top: 0;
+  font-size: 1.2em;
+}
+
+#deleteModal button {
+  padding: 10px;
+  background-color: #ff6f6f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+#deleteModal button:hover {
+  background-color: #e65c5c;
+}
+
+/* Mostrar o modal de exclusão quando necessário */
+#deleteOverlay.show {
+  display: flex;
+  opacity: 1;
+}
+
+#deleteOverlay.hide {
+  opacity: 0;
+  pointer-events: none; /* Impede interação enquanto está escondido */
+}
+
+/* Estilo para o Modal de Adicionar Novo Espaço */
+#addOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+  display: none; /* Inicialmente escondido */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: opacity 0.3s ease-in-out; /* Transição suave */
+}
+
+#addModal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  max-height: 80vh; /* Garante que o modal não ocupe mais que 80% da altura da tela */
+  overflow-y: auto; /* Permite o scroll quando o conteúdo for maior que o espaço disponível */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#addModal h2 {
+  margin-top: 0;
+}
+
+#addModal input, #addModal textarea, #addModal select {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#addModal button {
+  width: 100%;
+  padding: 10px;
+  background-color: #a7d7ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#addModal button:hover {
+  background-color: #6a94b7;
+}
+
+/* Mostrar o modal de adicionar quando necessário */
+#addOverlay.show {
+  display: flex; /* Exibe o overlay */
+  opacity: 1; /* Torna o overlay totalmente visível */
+}
+
+#addOverlay.hide {
+  opacity: 0; /* Torna invisível quando escondido */
+  pointer-events: none; /* Impede interação com o fundo enquanto oculto */
+}
+
+/* Estilo do Modal da reserva */
+#reservaOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+  display: none; /* Esconde inicialmente */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Garante que o modal fique sobre o conteúdo */
+  transition: opacity 0.3s ease-in-out; /* Transição suave */
+}
+
+#reservaModal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  max-height: 80vh; /* Garante que o modal não ocupe mais que 80% da altura da tela */
+  overflow-y: auto; /* Permite o scroll quando o conteúdo for maior que o espaço disponível */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#reservaModal h3 {
+  margin-top: 0;
+}
+
+#reservaModal input, #reservaModal textarea, #reservaModal select {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#reservaModal button {
+  width: 100%;
+  padding: 10px;
+  background-color: #a7d7ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#reservaModal button:hover {
+  background-color: #6a94b7;
+}
+
+/* Mostrar o modal da reserva quando necessário */
+#reservaOverlay.show {
+  display: flex; /* Exibe o overlay */
+  opacity: 1; /* Torna o overlay totalmente visível */
+}
+
+#reservaOverlay.hide {
+  opacity: 0; /* Torna invisível quando escondido */
+  pointer-events: none; /* Impede interação com o fundo enquanto oculto */
+}
+
+/* Estilo do Modal de Exclusão */
+#deleteOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+  display: none; /* Esconde inicialmente */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: opacity 0.3s ease-in-out; /* Transição suave */
+}
+
+.reserva-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background-color: #f9f9f9;
+  transition: background-color 0.3s ease;
+}
+
+.reserva-item:hover {
+  background-color: #e0e0e0;
+}
+
+.reserva-info p {
+  margin: 5px 0;
+}
+
+.reserva-info strong {
+  font-weight: bold;
+}
+
+/* Estilo do dropdown */
+.espaco-reserva .dropdown {
+  background-color: #f9f9f9;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  display: none;
+}
+
+.espaco-reserva {
+  background-color: #fff;
+  padding: 15px;
+  margin: 15px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.nome-espaco {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.espaco-reserva:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+
+}
+
+/* Estilo do botão de cancelar */
+.espaco-reserva .btn-cancelar {
+  background-color: #ff4747;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.espaco-reserva .btn-cancelar:hover {
+  background-color: #e63636;
+}
+
+/* Estilos para o modal de confirmação */
+.modal {
+  display: none; 
+  position: fixed;
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+  padding-top: 60px;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 300px;
+  border-radius: 10px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.espaco {
+  display: inline-block;
+  width: 300px;
+  margin: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.espaco-img {
+  width: 100%;
+  height: 200px; /* Tamanho fixo para as imagens */
+  object-fit: cover; /* Garante que a imagem será cortada para preencher o espaço sem distorcer */
+  border-radius: 5px;
+}
+
+.espaco h3 {
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+
+.espaco p {
+  color: #777;
+  font-size: 1em;
+  margin-top: 5px;
+}
+
+.espaco-link {
+  text-decoration: none;
+  color: #333;
+}
+
+.espaco:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.espaco-actions {
+  
+  
+  gap: 1px; /* Espaço entre os botões */
+}
+.espaco-actions button {
+  padding: 8px 16px;
+  font-size: 1em;
+  cursor: pointer;
+  border: 2px;
+  border-radius: 5px;
+  margin: 4px 0px 4px 0px;
+}
+
+
+.container-perfil {
+  width: 100%; /* Tornar o container 100% da largura disponível */
+  max-width: 800px; /* Tamanho máximo do container */
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 0 auto; /* Espaçamento à esquerda */
+}
+
+
+/* Título do perfil */
+.container-perfil h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+/* Informações do perfil */
+.perfil-info {
+  margin-bottom: 20px;
+}
+
+.perfil-info p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+.perfil-info strong {
+  color: #333;
+}
+
+/* Botão de Editar */
+#editButton {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: block;
+  margin: 20px auto;
+}
+
+#editButton:hover {
+  background-color: #218838;
+}
+
+.div-sobre-espaco {
+  width: 100%;
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Centraliza o conteúdo */
+}
+
+.div-sobre-espaco h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.div-sobre-espaco img {
+  width: 100%;
+  height: auto;
+  max-height: 400px; /* Limite de altura para a imagem */
+  object-fit: cover; /* Ajusta a imagem sem deformar */
+  border-radius: 8px;
+  margin-bottom: 20px; /* Espaçamento abaixo da imagem */
+}
+
+.div-sobre-espaco p {
+  font-size: 1.1em;
+  margin-bottom: 15px;
+  font-weight: bold;
+  
+}
+
+.div-sobre-espaco p strong {
+  font-weight: bold;
+  
+}
+
+.div-sobre-espaco span {
+  font-weight: normal; /* Garante que o texto dentro do <span> não fique em negrito */
+}
+
+#preco-espaco {
+  font-weight: bold;
+  color: #e74c3c; /* Cor de destaque para o preço */
+  font-size: 1.2em;
+}
+
+#reservar-link {
+  text-decoration: none; /* Remove sublinhado do link */
+}
+
+.botao-reservar {
+  background-color: #3498db; /* Cor do botão */
+  color: #fff;
+  font-size: 1.1em;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Animação suave para a cor */
+}
+
+.botao-reservar:hover {
+  background-color: #2980b9; /* Cor do botão ao passar o mouse */
+}
+
+.espacos-toggle {
+  display: flex;
+  justify-content: center; /* Alinha os itens horizontalmente no centro */
+  margin: 20px 0; /* Adiciona espaço ao redor do grupo de itens */
+}
+
+.espacos-toggle-item {
+  font-size: 1.2em; /* Deixa o texto maior */
+  margin: 0 15px; /* Espaçamento entre os itens */
+  padding: 10px;
+  cursor: pointer; /* Indicador de que é clicável */
+  transition: all 0.3s ease; /* Suaviza a transição do hover */
+}
+
+.espacos-toggle-item:hover, .espacos-toggle-item.active:hover {
+  color: #007BFF; /* Altera a cor do texto no hover */
+  text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+}
+
+#btnAddEspaco {
+  display: block; /* Torna o botão um bloco */
+  margin: 0 auto; /* Centraliza o botão horizontalmente */
+  padding: 10px 20px; /* Ajuste do padding para melhorar a aparência */
+  font-size: 1.2em; /* Tamanho da fonte */
+  background-color: #007BFF; /* Cor de fundo do botão */
+  color: white; /* Cor do texto */
+  border: none; /* Remove bordas */
+  border-radius: 5px; /* Bordas arredondadas */
+  cursor: pointer; /* Indica que é clicável */
+  text-align: center; /* Centraliza o texto no botão */
+  transition: all 0.3s ease; /* Transição suave */
+}
+
+#btnAddEspaco:hover {
+  background-color: #0056b3; /* Cor de fundo ao passar o mouse */
+}
+
+h2 {
+  text-align: center;
+}
+
+.modal-content button {
+  padding: 10px 20px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px 15px;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+/* Botão 'Sim' - Cancelar */
+.modal-content button:first-child {
+  background-color: #e74c3c; /* Vermelho */
+  color: white;
+  border: 2px solid #e74c3c;
+}
+
+/* Botão 'Não' - Fechar */
+.modal-content button:nth-child(2) {
+  background-color: #2ecc71; /* Verde */
+  color: white;
+  border: 2px solid #2ecc71;
+}
+
+/* Efeito de hover para ambos os botões */
+.modal-content button:hover {
+  opacity: 0.9;
+  transform: scale(1.05); /* Um pequeno aumento de tamanho no hover */
+}
+
+#espacos-lista{
+  text-align: center;
+}
+
+#form-reserva {
+  width: 100%;
+  max-width: 400px; /* Tamanho máximo do formulário */
+  margin: 0 auto; /* Centraliza o formulário na tela */
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Título do formulário */
+#form-reserva h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Estilo dos labels */
+#form-reserva label {
+  font-size: 1.1em;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Estilo dos inputs e select */
+#form-reserva input,
+#form-reserva select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+/* Estilo do botão */
+#form-reserva button {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.2em;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Efeito de hover no botão */
+#form-reserva button:hover {
+  background-color: #2980b9;
+}

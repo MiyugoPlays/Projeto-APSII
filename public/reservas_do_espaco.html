@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Reservar Espaço</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/"> <h1> RESERVAS <br>SALLE</h1></a>
+            <ul>
+                <li><a href="/espacos">Espaços</a></li>
+                <li><a href="/sobre">Sobre</a></li>
+                <li>
+                    <a href="/login">
+                        <img src="/assets/contact.png" class="perfil">
+                        <span class="login-texto">Fazer Login</span>
+                    </a>
+                    <div id="dropdown" class="dropdown-content" style="display: none;">
+                        <a href="/meu-perfil">Meu Perfil</a>
+                        <a href="/minhas-reservas">Minhas Reservas</a>
+                        <a href="/meus-espacos">Meus Espaços</a>
+                        <a href="/logout" id="sair">Sair</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div id="reservas-list">
+        <h2>Reservas deste espaço</h2>
+        <p id="reserva-info"></p>
+        <ul id="reservas-lista"></ul>
+    </div>
+
+    <!-- Modal de Edição -->
+    <div id="reservaOverlay" class="hide">
+        <div id="reservaModal">
+            <h3>Alterar Status da Reserva</h3>
+            <form id="form-editar-status">
+                <label for="status">Status da Reserva:</label>
+                <select id="status" name="status">
+                    <option value="pendente">Pendente</option>
+                    <option value="confirmada">Confirmada</option>
+                    <option value="cancelada">Cancelada</option>
+                </select><br><br>
+                <button type="submit">Salvar Alterações</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/navigation.js"></script>
+    <script src="/js/scriptHeader.js"></script>
+    <script src="/js/scriptReservasDoEspaco.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="\css\style.css">
+    <title>Reservas Salle</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/"> <h1> RESERVAS <br>SALLE</h1></a>
+            <ul>
+                <li><a href="/espacos">Espaços</a></li>
+                <li><a href="/sobre">Sobre</a></li>
+                <li>
+                    <a href="/login">
+                        <img src="/assets/contact.png" class="perfil">
+                        <span class="login-texto">Fazer Login</span>
+                    </a>
+                    <div id="dropdown" class="dropdown-content" style="display: none;">
+                        <a href="/meu-perfil">Meu Perfil</a>
+                        <a href="/minhas-reservas">Minhas Reservas</a>
+                        <a href="/meus-espacos">Meus Espaços</a>
+                        <a href="/logout" id="sair">Sair</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="div-sobre-espaco">
+        <h1 id="nome-espaco"></h1>
+        <img id="imagem-espaco" />
+        <p id="descricao-espaco"></p>
+        <p>Bairro: <span id="bairro-espaco"></span></p>
+        <p>Capacidade: <span id="capacidade-espaco"></span></p>
+        <p>Cidade: <span id="cidade-espaco"></span></p>
+        <p>Estado: <span id="estado-espaco"></span></p>
+        <p>Rua: <span id="rua-espaco"></span></p>
+        <p>Complemento: <span id="comple-espaco"></span></p>
+        <p>Número: <span id="num-espaco"></span></p>
+        <p id="preco-espaco"></p>
+        <!-- Link do botão "Reservar" -->
+        <a id="reservar-link" href="#">
+            <button class="botao-reservar">Reservar</button>
+        </a>
+    </div>
+    <script src="/js/navigation.js"></script>
+    <script src="/js/scriptHeader.js"></script>
+    <script src="/js/scriptSobreEspaco.js"></script>
+</body>
+</html>

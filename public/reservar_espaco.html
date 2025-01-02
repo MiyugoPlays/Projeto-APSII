@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <title>Reservar Espaço</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/"> <h1> RESERVAS <br>SALLE</h1></a>
+            <ul>
+                <li><a href="/espacos">Espaços</a></li>
+                <li><a href="/sobre">Sobre</a></li>
+                <li>
+                    <a href="/login">
+                        <img src="/assets/contact.png" class="perfil">
+                        <span class="login-texto">Fazer Login</span>
+                    </a>
+                    <div id="dropdown" class="dropdown-content" style="display: none;">
+                        <a href="/meu-perfil">Meu Perfil</a>
+                        <a href="/minhas-reservas">Minhas Reservas</a>
+                        <a href="/meus-espacos">Meus Espaços</a>
+                        <a href="/logout" id="sair">Sair</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div>
+        <h2>Confirmar Reserva</h2>
+        
+        <form id="form-reserva">
+            <label for="data_inicio">Data de Início:</label>
+            <input type="datetime-local" id="data_inicio" name="data_inicio" required><br><br>
+            
+            <label for="data_fim">Data de Fim:</label>
+            <input type="datetime-local" id="data_fim" name="data_fim" required><br><br>
+
+            <label for="forma_pagamento">Forma de Pagamento:</label>
+            <select id="forma_pagamento" name="forma_pagamento" required>
+                <option value="pix">PIX</option>
+                <option value="debito">Débito</option>
+                <option value="credito">Crédito</option>
+                <option value="boleto">Boleto</option>
+            </select><br><br>
+
+            <button type="submit">Confirmar Reserva</button>
+        </form>
+
+    </div>
+
+    <script src="/js/navigation.js"></script>
+    <script src="/js/scriptHeader.js"></script>
+    <script src="/js/scriptReservarEspaco.js"></script>
+</body>
+</html>
